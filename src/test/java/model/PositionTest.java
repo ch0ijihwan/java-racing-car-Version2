@@ -32,6 +32,6 @@ class PositionTest {
         //then
         assertThatThrownBy(() -> new model.Position(NEGATIVE_NUMBER))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("position 값이 음수입니다.");
+                .hasMessage("Position 값이 음수입니다.");
     }
 }
