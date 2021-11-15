@@ -30,7 +30,7 @@ class PositionTest {
     @DisplayName("포지션에 대한 값이 음수일경우 IllegalArgumentException 반환 .")
     void validateName() {
         //then
-        assertThatThrownBy(() -> new model.Position(NEGATIVE_NUMBER))
+        assertThatThrownBy(() -> new Position(NEGATIVE_NUMBER))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Position 값이 음수입니다.");
     }
