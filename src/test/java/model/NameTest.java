@@ -11,8 +11,8 @@ class NameTest {
     @DisplayName("이름 객체 생성시, 입력받은 문자열을 이름으로 저장한다.")
     void createName() {
         //given
-        String inputName = "jihwan";
-        String expectedName = "jihwan";
+        String inputName = "jihwa";
+        String expectedName = "jihwa";
 
         //when
         Name actual = new Name(inputName);
@@ -24,7 +24,7 @@ class NameTest {
     @DisplayName("이름 객체의 이름의 길이는  5자를 초과할 수 없다.")
     void validateNameSize() {
         //given
-        String inputName = "JiHwan2";
+        String inputName = "JiHwan";
 
         //then
         assertThatThrownBy(() -> new Name(inputName))
