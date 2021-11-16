@@ -16,12 +16,20 @@ public class Car {
         this.position = new Position(position);
     }
 
+    public Name getName() {
+        return name;
+    }
+
     public Position getPosition() {
         return position;
     }
 
     public void move(int movement) {
         this.position = this.position.move(movement);
+    }
+
+    public boolean equalsDistance(Car car) {
+        return this.position.equals(car.position);
     }
 
     @Override
@@ -35,5 +43,14 @@ public class Car {
     @Override
     public int hashCode() {
         return Objects.hash(position, name);
+    }
+
+    @Override
+    public String
+    toString() {
+        return "Car{" +
+                "position=" + position.getValue() +
+                ", name=" + name.getValue() +
+                '}';
     }
 }
