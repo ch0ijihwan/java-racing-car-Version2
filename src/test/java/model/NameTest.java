@@ -20,7 +20,7 @@ class NameTest {
         //then
         assertThat(actual).isEqualTo(new Name(expectedName));
     }
-
+    @Test
     @DisplayName("이름 객체의 이름의 길이는  5자를 초과할 수 없다.")
     void validateNameSize() {
         //given
