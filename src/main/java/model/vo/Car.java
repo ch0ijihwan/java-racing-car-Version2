@@ -1,4 +1,4 @@
-package model;
+package model.vo;
 
 import java.util.Objects;
 
@@ -20,8 +20,8 @@ public class Car {
         return position;
     }
 
-    public void move(int movement){
-        this.position =  this.position.move(movement);
+    public void move(int movement) {
+        this.position = this.position.move(movement);
     }
 
     @Override

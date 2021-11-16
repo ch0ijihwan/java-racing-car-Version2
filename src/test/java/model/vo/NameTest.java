@@ -1,4 +1,4 @@
-package model;
+package model.vo;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,6 +20,7 @@ class NameTest {
         //then
         assertThat(actual).isEqualTo(new Name(expectedName));
     }
+
     @Test
     @DisplayName("이름 객체의 이름의 길이는 5자를 초과할 수 없다.")
     void validateNameSize() {
@@ -34,13 +35,12 @@ class NameTest {
 
     @Test
     @DisplayName("Name 객체 생성시 공백을 입력 받으면 예외처리를 반환한다.")
-    void validateBlankName()
-    {
+    void validateBlankName() {
         //given
         String blankName = "";
 
         //then
-        assertThatThrownBy(()-> new Name(blankName))
+        assertThatThrownBy(() -> new Name(blankName))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Name 값의 길이는 0보다 길어야합니다.");
     }

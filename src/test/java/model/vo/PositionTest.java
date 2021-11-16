@@ -1,8 +1,7 @@
-package model;
+package model.vo;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -13,8 +12,7 @@ class PositionTest {
 
     @Test
     @DisplayName("객체 생성시 입력받은 양수를 position 으로 초기화 한다.")
-    void createPosition()
-    {
+    void createPosition() {
         //given
         int inputNumber = 3;
         int expectedNumber = 3;

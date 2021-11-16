@@ -1,4 +1,4 @@
-package model;
+package model.vo;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ class CarTest {
         Car car = new Car(inputName);
 
         //then
-        assertThat(car).isEqualTo(new Car(expectName,expectedPosition));
+        assertThat(car).isEqualTo(new Car(expectName, expectedPosition));
     }
 
     @Test
