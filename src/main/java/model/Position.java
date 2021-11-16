@@ -3,11 +3,15 @@ package model;
 import java.util.Objects;
 
 public class Position {
-    private final int value;
+    private int value;
 
     public Position(final int value) {
         validatePosition(value);
         this.value = value;
+    }
+    public Position move(int movement){
+        value = value + movement;
+        return this;
     }
 
     private void validatePosition(final int position) {
@@ -15,6 +19,8 @@ public class Position {
             throw new IllegalArgumentException("Position 값이 음수입니다.");
         }
     }
+
+
 
     @Override
     public boolean equals(Object o) {
