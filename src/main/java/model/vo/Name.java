@@ -11,6 +11,9 @@ public class Name {
         validateNameSize(value);
         this.value = value;
     }
+    public String getValue(){
+        return this.value;
+    }
 
     private void validateNameSize(final String value) {
         if (value.length() > MAX_NAME_SIZE) {
