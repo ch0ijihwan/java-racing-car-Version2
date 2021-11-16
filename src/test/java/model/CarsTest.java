@@ -37,4 +37,18 @@ class CarsTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("자동차의 이름은 중복 될 수 없습니다.");
     }
+
+    @Test
+    @DisplayName("winners 메서드 실행시 1등한 자동차들을 뽑아 리스트 형태로 반환한다.")
+    void getWinners() {
+        //given
+        Cars inputCars = new Cars(Arrays.asList(new Car("cocoa", 3), new Car("love", 3), new Car("apple", 1), new Car("sky", 2)));
+        List<Car> expectedCars = Arrays.asList(new Car("cocoa", 3), new Car("love", 3));
+
+        //when
+        List<Car> actualCars = inputCars.winners();
+
+        //then
+        assertThat(actualCars).isEqualTo(expectedCars);
+    }
 }
