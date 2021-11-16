@@ -1,8 +1,10 @@
 package model;
 
+import model.movement.MovementStrategy;
 import model.vo.Car;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -17,8 +19,16 @@ public class Cars {
                 .collect(Collectors.toList());
     }
 
+    protected Cars(final List<Car> inputCars) {
+        racingCars = inputCars;
+    }
+
     public List<Car> getRacingCars() {
         return racingCars;
+    }
+
+    public void raceAll(final MovementStrategy movementStrategy) {
+        racingCars.forEach(car -> car.move(movementStrategy.generateMovement()));
     }
 
     private void validateDuplicationNames(String[] tokens) {
@@ -27,6 +37,24 @@ public class Cars {
         }
     }
 
+    public List<Car> winners() {
+        Car topCar = findTopCar();
+        return racingCars
+                .stream()
+                .filter(topCar::equalsDistance)
+                .collect(Collectors.toList());
+    }
+
+    private Car findTopCar() {
+        List<Car> winners = sortCars(racingCars);
+        return winners.get(winners.size() - 1);
+    }
+
+    private List<Car> sortCars(List<Car> racingCars) {
+        return racingCars.stream()
+                .sorted(Comparator.comparing(car -> car.getPosition().getValue()))
+                .collect(Collectors.toUnmodifiableList());
+    }
 
     @Override
     public boolean equals(Object o) {
