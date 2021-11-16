@@ -9,7 +9,8 @@ public class Position {
         validatePosition(value);
         this.value = value;
     }
-    public Position move(int movement){
+
+    public Position move(int movement) {
         value = value + movement;
         return this;
     }
@@ -19,8 +20,6 @@ public class Position {
             throw new IllegalArgumentException("Position 값이 음수입니다.");
         }
     }
-
-
 
     @Override
     public boolean equals(Object o) {
