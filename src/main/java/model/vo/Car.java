@@ -16,7 +16,7 @@ public class Car {
         this.position = new Position(position);
     }
 
-    public Name getName() {
+    public Name getName(){
         return name;
     }
 
@@ -24,12 +24,12 @@ public class Car {
         return position;
     }
 
-    public void move(int movement) {
-        this.position = this.position.move(movement);
-    }
-
     public boolean equalsDistance(Car car) {
         return this.position.equals(car.position);
+    }
+
+    public void move(int movement) {
+        this.position = this.position.move(movement);
     }
 
     @Override
@@ -46,8 +46,7 @@ public class Car {
     }
 
     @Override
-    public String
-    toString() {
+    public String toString() {
         return "Car{" +
                 "position=" + position.getValue() +
                 ", name=" + name.getValue() +
