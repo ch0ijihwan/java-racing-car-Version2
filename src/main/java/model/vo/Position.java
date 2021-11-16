@@ -15,6 +15,10 @@ public class Position {
         return this;
     }
 
+    public int getValue() {
+        return value;
+    }
+
     private void validatePosition(final int position) {
         if (position < 0) {
             throw new IllegalArgumentException("Position 값이 음수입니다.");
