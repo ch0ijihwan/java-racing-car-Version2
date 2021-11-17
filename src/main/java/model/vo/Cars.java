@@ -18,19 +18,19 @@ public class Cars {
                 .collect(Collectors.toList());
     }
 
-    protected Cars(final List<Car> inputCars) {
-        racingCars = inputCars;
+    protected Cars(final List<Car> inputedCarsList) {
+        racingCars = inputedCarsList;
     }
 
     public List<Car> getRacingCars() {
         return racingCars;
     }
 
-    public void raceAll(final MovementStrategy movementStrategy) {
+    public void moveAll(final MovementStrategy movementStrategy) {
         racingCars.forEach(car -> car.move(movementStrategy.generateMovement()));
     }
 
-    private void validateDuplicationNames(String[] tokens) {
+    private void validateDuplicationNames(final String[] tokens) {
         if (tokens.length != Arrays.stream(tokens).distinct().count()) {
             throw new IllegalArgumentException("자동차의 이름은 중복 될 수 없습니다.");
         }
@@ -49,7 +49,7 @@ public class Cars {
         return winners.get(winners.size() - 1);
     }
 
-    private List<Car> sortCars(List<Car> racingCars) {
+    private List<Car> sortCars(final List<Car> racingCars) {
         return racingCars.stream()
                 .sorted(Comparator.comparing(car -> car.getPosition().getValue()))
                 .collect(Collectors.toUnmodifiableList());
