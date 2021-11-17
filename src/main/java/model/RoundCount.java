@@ -5,7 +5,7 @@ import java.util.Objects;
 public class RoundCount {
     private int count;
 
-    public RoundCount(int count) {
+    public RoundCount(final int count) {
         this.count = count;
     }
 
