@@ -4,12 +4,13 @@ import java.util.Objects;
 
 public class Car {
     private static final int ONE_STEP = 1;
+    private  static  final  int START_POSITION = 0;
     private Position position;
     private final Name name;
 
     public Car(final String name) {
         this.name = new Name(name);
-        this.position = new Position(0);
+        this.position = new Position(START_POSITION);
     }
 
     public Car(final String name,final int position) {
