@@ -43,7 +43,7 @@ public class RacingGame {
         return roundCount.getRoundCount() != 0;
     }
 
-    public void  endOneRound(){
+    public void endOneRound() {
         roundCount.decreaseRoundCount();
     }
 
