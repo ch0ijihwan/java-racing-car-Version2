@@ -9,21 +9,22 @@ import static view.StatusDisplay.*;
 
 public class Controller {
     private final RacingGame racingGame;
-    private int numberOfAttempts;
 
     public Controller(final MovementStrategy movementStrategy) {
         showInputNames();
-        this.racingGame = new RacingGame(inputRacingCarNames(), movementStrategy);
+
         showInputNumberOfAttempts();
-        this.numberOfAttempts = inputNumberAttempts();
+        String[] inputtedNames = inputRacingCarNames();
+        int numberOfAttempts = inputNumberAttempts();
+        this.racingGame = new RacingGame(inputtedNames, numberOfAttempts, movementStrategy);
     }
 
     public void run() {
         showStartGame();
-        while (numberOfAttempts > 0) {
+        while (racingGame.isNotOver()) {
             racingGame.raceOneRound();
             showGameStatus(racingGame.getCars().getRacingCars());
-            numberOfAttempts--;
+            racingGame.endOneRound();
         }
         showBar();
         showGameStatus(racingGame.getCars().getRacingCars());
