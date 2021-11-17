@@ -9,9 +9,11 @@ import java.util.List;
 public class RacingGame {
     private final Cars cars;
     private final MovementStrategy movementStrategy;
+    private RoundCount roundCount;
 
-    public RacingGame(final String[] inputtedNames, final MovementStrategy movementStrategy) {
+    public RacingGame(final String[] inputtedNames, final int inputtedRoundCount, final MovementStrategy movementStrategy) {
         this.cars = new Cars(inputtedNames);
+        this.roundCount = new RoundCount(inputtedRoundCount);
         this.movementStrategy = movementStrategy;
 
     }
@@ -32,4 +34,17 @@ public class RacingGame {
     public Cars getCars() {
         return this.cars;
     }
+
+    public RoundCount getRoundCount() {
+        return roundCount;
+    }
+
+    public boolean isNotOver() {
+        return roundCount.getRoundCount() != 0;
+    }
+
+    public void  endOneRound(){
+        roundCount.decreaseRoundCount();
+    }
+
 }
