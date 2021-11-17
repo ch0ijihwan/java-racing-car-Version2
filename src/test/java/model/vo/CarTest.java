@@ -42,11 +42,11 @@ class CarTest {
     @DisplayName("move 메서드 실행시 파라미터로 부터 입력받은 수 만큼, 기존의 position 값에 입력받은 값을 더한 새로은 Position 객체로 갈아 끼운다.")
     void move() {
         //given
-        Car car = new Car("cici", 1);
-        int inputMovement = 3;
-        int expectedPosition = 4;
+        Car car = new Car("apple", 1);
+        int expectedPosition = 2;
+
         //when
-        car.move(inputMovement);
+        car.move(true);
         Position actualPosition = car.getPosition();
 
         //then

@@ -3,6 +3,7 @@ package model.vo;
 import java.util.Objects;
 
 public class Car {
+    private static final int ONE_STEP = 1;
     private Position position;
     private final Name name;
 
@@ -28,8 +29,10 @@ public class Car {
         return this.position.equals(car.position);
     }
 
-    public void move(int movement) {
-        this.position = this.position.move(movement);
+    public void move(boolean isCarMove) {
+        if(isCarMove) {
+            this.position = this.position.move(ONE_STEP);
+        }
     }
 
     @Override
