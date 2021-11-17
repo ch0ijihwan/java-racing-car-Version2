@@ -10,7 +10,7 @@ public class Position {
         this.value = value;
     }
 
-    public Position move(int movement) {
+    public Position move(final int movement) {
         value = value + movement;
         return this;
     }

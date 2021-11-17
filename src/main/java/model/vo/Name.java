@@ -7,7 +7,7 @@ public class Name {
     private static final int MIN_NAME_SIZE = 1;
     private final String value;
 
-    public Name(String value) {
+    public Name(final String value) {
         validateNameSize(value);
         this.value = value;
     }

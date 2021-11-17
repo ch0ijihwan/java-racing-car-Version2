@@ -7,12 +7,12 @@ public class Car {
     private Position position;
     private final Name name;
 
-    public Car(String name) {
+    public Car(final String name) {
         this.name = new Name(name);
         this.position = new Position(0);
     }
 
-    public Car(String name, int position) {
+    public Car(final String name,final int position) {
         this.name = new Name(name);
         this.position = new Position(position);
     }
@@ -25,11 +25,11 @@ public class Car {
         return position;
     }
 
-    public boolean equalsDistance(Car car) {
+    public boolean equalsDistance(final Car car) {
         return this.position.equals(car.position);
     }
 
-    public void move(boolean isCarMove) {
+    public void move(final boolean isCarMove) {
         if(isCarMove) {
             this.position = this.position.move(ONE_STEP);
         }
