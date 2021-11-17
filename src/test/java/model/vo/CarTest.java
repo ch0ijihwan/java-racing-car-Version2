@@ -38,7 +38,21 @@ class CarTest {
     }
 
     @Test
-    @DisplayName("move 메서드 실행시 파라미터로 부터 입력받은 수 만큼, 기존의 position 값에 입력받은 값을 더한 새로은 Position 객체로 갈아 끼운다.")
+    @DisplayName("getName 실행시 Name 객체를 반환한다.")
+    void getName() {
+        //given
+        Car car = new Car("apple");
+        Name expectedName = new Name("apple");
+
+        //when
+        Name actual = car.getName();
+
+        //then
+        assertThat(actual).isEqualTo(expectedName);
+    }
+
+    @Test
+    @DisplayName("move 메서드 실행시 파라미터로 부터 입력받은 수 만큼, 기존의 position 값에 1을 더한 Position 객체로 갈아 끼운다.")
     void move() {
         //given
         Car car = new Car("apple", 1);
