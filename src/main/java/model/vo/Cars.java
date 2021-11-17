@@ -1,7 +1,6 @@
-package model;
+package model.vo;
 
 import model.movement.MovementStrategy;
-import model.vo.Car;
 
 import java.util.Arrays;
 import java.util.Comparator;
