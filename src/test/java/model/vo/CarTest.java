@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CarTest {
-
     @Test
     @DisplayName("Car 객체 생성시 자동차의 이름만 받은경우, 받은 이름과 Position 을 0 으로 하는 자동차 객체를 생성한다.")
     void createCarWhenInputName() {
@@ -52,5 +51,4 @@ class CarTest {
         //then
         assertThat(actualPosition).isEqualTo(new Position(expectedPosition));
     }
-
 }
