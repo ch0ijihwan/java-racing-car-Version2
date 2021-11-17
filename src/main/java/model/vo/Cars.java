@@ -18,7 +18,7 @@ public class Cars {
                 .collect(Collectors.toList());
     }
 
-    protected Cars(final List<Car> inputedCarsList) {
+    public Cars(final List<Car> inputedCarsList) {
         racingCars = inputedCarsList;
     }
 
