@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Car {
     private static final int ONE_STEP = 1;
-    private  static  final  int START_POSITION = 0;
+    private static final int START_POSITION = 0;
     private Position position;
     private final Name name;
 
@@ -13,7 +13,7 @@ public class Car {
         this.position = new Position(START_POSITION);
     }
 
-    public Car(final String name,final int position) {
+    public Car(final String name, final int position) {
         this.name = new Name(name);
         this.position = new Position(position);
     }
@@ -31,7 +31,7 @@ public class Car {
     }
 
     public void move(final boolean isCarMove) {
-        if(isCarMove) {
+        if (isCarMove) {
             this.position = this.position.move(ONE_STEP);
         }
     }
