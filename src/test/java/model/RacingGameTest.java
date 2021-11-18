@@ -4,6 +4,7 @@ import model.movement.MovementStrategy;
 import model.movement.RandomMovementStrategy;
 import model.vo.Car;
 import model.vo.Cars;
+import model.vo.RoundCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
