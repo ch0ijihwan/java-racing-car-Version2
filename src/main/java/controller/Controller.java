@@ -12,7 +12,6 @@ public class Controller {
 
     public Controller(final MovementStrategy movementStrategy) {
         showInputNames();
-
         showInputNumberOfAttempts();
         String[] inputtedNames = inputRacingCarNames();
         int numberOfAttempts = inputNumberAttempts();
