@@ -1,8 +1,9 @@
-package model;
+package model.vo;
 
 import java.util.Objects;
 
 public class RoundCount {
+    private static final int ONE_ROUND_COUNT = 1;
     private int count;
 
     public RoundCount(final int count) {
@@ -14,7 +15,7 @@ public class RoundCount {
     }
 
     public void decreaseRoundCount() {
-        this.count = count - 1;
+        this.count = count - ONE_ROUND_COUNT;
     }
 
     @Override
