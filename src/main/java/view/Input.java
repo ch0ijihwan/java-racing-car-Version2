@@ -12,6 +12,7 @@ public class Input {
         return SCANNER.nextLine()
                 .split(",");
     }
+
     public static int inputNumberAttempts() {
         return SCANNER.nextInt();
     }

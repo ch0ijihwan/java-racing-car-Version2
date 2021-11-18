@@ -29,7 +29,7 @@ public class StatusDisplay {
 
     }
 
-    public static void showBar(){
+    public static void showBar() {
         System.out.println("====================================================");
     }
 
