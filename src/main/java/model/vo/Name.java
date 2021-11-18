@@ -11,7 +11,8 @@ public class Name {
         validateNameSize(value);
         this.value = value;
     }
-    public String getValue(){
+
+    public String getValue() {
         return this.value;
     }
 
@@ -23,7 +24,6 @@ public class Name {
             throw new IllegalArgumentException("Name 값의 길이는 0보다 길어야합니다.");
         }
     }
-
 
     @Override
     public boolean equals(Object o) {
