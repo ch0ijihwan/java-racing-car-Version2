@@ -16,7 +16,6 @@ public class RacingGame {
         this.cars = new Cars(inputtedNames);
         this.roundCount = new RoundCount(inputtedRoundCount);
         this.movementStrategy = movementStrategy;
-
     }
 
     protected RacingGame(final List<Car> carListForTest, final MovementStrategy movementStrategy) {
@@ -47,5 +46,4 @@ public class RacingGame {
     public void endOneRound() {
         roundCount.decreaseRoundCount();
     }
-
 }
