@@ -45,7 +45,7 @@ class CarsTest {
         List<Car> expectedCars = Arrays.asList(new Car("cocoa", 3), new Car("love", 3));
 
         //when
-        List<Car> actualCars = inputCars.winners();
+        List<Car> actualCars = inputCars.getWinnerCars();
 
         //then
         assertThat(actualCars).isEqualTo(expectedCars);
