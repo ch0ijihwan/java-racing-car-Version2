@@ -27,7 +27,7 @@ public class Cars {
     }
 
     public void moveAll(final MovementStrategy movementStrategy) {
-        racingCars.forEach(car -> car.move(movementStrategy.generateMovement()));
+        racingCars.forEach(car -> car.move(movementStrategy.generateMovable()));
     }
 
     private void validateDuplicationNames(final String[] tokens) {
