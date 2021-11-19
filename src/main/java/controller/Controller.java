@@ -2,7 +2,7 @@ package controller;
 
 import model.RacingGame;
 import model.movement.MovementStrategy;
-import view.displayStrategy.StatusDisplayStrategy;
+import view.StatusDisplayStrategy.StatusDisplayStrategy;
 import view.inputStrategy.InputStrategy;
 
 public class Controller {

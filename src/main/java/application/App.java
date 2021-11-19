@@ -3,8 +3,8 @@ package application;
 import controller.Controller;
 import model.movement.MovementStrategy;
 import model.movement.RandomMovementStrategy;
-import view.displayStrategy.StatusDisplay;
-import view.displayStrategy.StatusDisplayStrategy;
+import view.StatusDisplayStrategy.StatusDisplay;
+import view.StatusDisplayStrategy.StatusDisplayStrategy;
 import view.inputStrategy.ConsoleInputStrategy;
 import view.inputStrategy.InputStrategy;
 
