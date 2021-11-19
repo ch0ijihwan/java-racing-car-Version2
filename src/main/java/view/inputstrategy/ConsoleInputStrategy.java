@@ -1,7 +1,6 @@
-package view.inputStrategy;
+package view.inputstrategy;
 
 import java.util.Scanner;
-//TODO : 인터페이스로 바꿔보기
 public class ConsoleInputStrategy implements InputStrategy{
     private static final Scanner SCANNER = new Scanner(System.in);
 

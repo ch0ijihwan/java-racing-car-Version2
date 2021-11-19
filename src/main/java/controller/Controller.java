@@ -2,8 +2,8 @@ package controller;
 
 import model.RacingGame;
 import model.movement.MovementStrategy;
-import view.StatusDisplayStrategy.StatusDisplayStrategy;
-import view.inputStrategy.InputStrategy;
+import view.displaystrategy.StatusDisplayStrategy;
+import view.inputstrategy.InputStrategy;
 
 public class Controller {
     private final RacingGame racingGame;

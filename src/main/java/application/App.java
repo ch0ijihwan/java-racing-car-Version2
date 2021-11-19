@@ -3,10 +3,10 @@ package application;
 import controller.Controller;
 import model.movement.MovementStrategy;
 import model.movement.RandomMovementStrategy;
-import view.StatusDisplayStrategy.StatusDisplay;
-import view.StatusDisplayStrategy.StatusDisplayStrategy;
-import view.inputStrategy.ConsoleInputStrategy;
-import view.inputStrategy.InputStrategy;
+import view.displaystrategy.StatusDisplay;
+import view.displaystrategy.StatusDisplayStrategy;
+import view.inputstrategy.ConsoleInputStrategy;
+import view.inputstrategy.InputStrategy;
 
 public class App {
     public static void main(String[] args) {

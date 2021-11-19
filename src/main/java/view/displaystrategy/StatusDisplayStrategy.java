@@ -1,4 +1,4 @@
-package view.StatusDisplayStrategy;
+package view.displaystrategy;
 
 import model.vo.Car;
 

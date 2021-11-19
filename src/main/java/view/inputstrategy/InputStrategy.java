@@ -1,4 +1,4 @@
-package view.inputStrategy;
+package view.inputstrategy;
 
 public interface InputStrategy {
     String[] inputRacingCarNames();
