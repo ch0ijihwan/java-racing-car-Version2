@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Cars {
-    List<Car> racingCars;
+    private final List<Car> racingCars;
 
     public Cars(final String[] inputtedNames) {
         validateDuplicationNames(inputtedNames);
@@ -18,8 +18,8 @@ public class Cars {
                 .collect(Collectors.toList());
     }
 
-    public Cars(final List<Car> inputedCarsList) {
-        racingCars = inputedCarsList;
+    public Cars(final List<Car> inputedCars) {
+        racingCars = inputedCars;
     }
 
     public List<Car> getRacingCars() {
@@ -31,28 +31,35 @@ public class Cars {
     }
 
     private void validateDuplicationNames(final String[] tokens) {
-        if (tokens.length != Arrays.stream(tokens).distinct().count()) {
+        if (hasDuplication(tokens)) {
             throw new IllegalArgumentException("자동차의 이름은 중복 될 수 없습니다.");
         }
     }
 
-    public List<Car> winners() {
-        Car topCar = findTopCar();
-        return racingCars
+    private boolean hasDuplication(final String[] tokens) {
+        return tokens.length != Arrays.stream(tokens).distinct().count();
+    }
+
+    public List<Car> getWinnerCars() {
+        int mostFarPosiotion = findMaxPosition();
+        return findSamePositionCars(mostFarPosiotion);
+    }
+
+    private int findMaxPosition() {
+        int maxPosition = 0;
+        for (Car car : this.racingCars) {
+            if (car.getPosition().getValue() > maxPosition) {
+                maxPosition = car.getPosition().getValue();
+            }
+        }
+        return maxPosition;
+    }
+
+    private List<Car> findSamePositionCars(int pivotPosition) {
+        return this.racingCars
                 .stream()
-                .filter(topCar::equalsDistance)
+                .filter(car -> car.getPosition().getValue() == pivotPosition)
                 .collect(Collectors.toList());
-    }
-
-    private Car findTopCar() {
-        List<Car> winners = sortCars(racingCars);
-        return winners.get(winners.size() - 1);
-    }
-
-    private List<Car> sortCars(final List<Car> racingCars) {
-        return racingCars.stream()
-                .sorted(Comparator.comparing(car -> car.getPosition().getValue()))
-                .collect(Collectors.toUnmodifiableList());
     }
 
     @Override
