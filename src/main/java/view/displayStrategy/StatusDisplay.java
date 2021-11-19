@@ -3,10 +3,12 @@ package view.displayStrategy;
 import model.vo.Car;
 
 import java.util.List;
-import java.util.stream.IntStream;
+import java.util.StringJoiner;
 
 public class StatusDisplay implements StatusDisplayStrategy {
-    private static final int FIRST_INDEX = 0;
+    private static final String SPOT = ",";
+    private static final String POSITION_BAR = " - ";
+    private static final String COLON = " : ";
 
     @Override
     public void showInputNames() {
@@ -25,30 +27,26 @@ public class StatusDisplay implements StatusDisplayStrategy {
 
     @Override
     public void showGameStatus(List<Car> racingCars) {
-        IntStream.range(0, racingCars.size())
-                .forEach(index -> System.out.println(racingCars.get(index).getName().getValue() + " : "
-                        + "- ".repeat(racingCars.get(index).getPosition().getValue())));
-
-        //TODO : 두가지로 해결, forEach로 인덱스 관여하고, getPosition과 getValues 줄이기
+        for (Car car : racingCars
+        ) {
+            System.out.print(car.getNameValue());
+            System.out.print(COLON);
+            System.out.println(POSITION_BAR.repeat(car.getPositionValue()));
+        }
         System.out.println();
     }
 
     @Override
-    public  void showBar() {
+    public void showBar() {
         System.out.println("====================================================");
     }
 
     @Override
     public void showEndGame(List<Car> winners) {
         System.out.print("최종 우승자는  ");
-        if (winners.size() == 1) {
-            System.out.print(winners.get(FIRST_INDEX).getNameValue());
-        }
-        if (winners.size() > 1) { // TODO : StringJoiner 공부해서 적용 해보기
-            //TODO : 디미터 법칙 찾아 보기 -> 아래 코드는 디미터 법칙에 위배 됨.
-            IntStream.range(0, winners.size())
-                    .forEach(index -> System.out.print(winners.get(index).getName().getValue() + ","));
-        }
+        StringJoiner stringJoiner = new StringJoiner(SPOT);
+        winners.forEach(winner -> stringJoiner.add(winner.getNameValue()));
+        System.out.print(stringJoiner);
         System.out.print(" 입니다.");
     }
 }
