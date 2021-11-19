@@ -48,8 +48,8 @@ public class Cars {
     private int findMaxPosition() {
         int maxPosition = 0;
         for (Car car : this.racingCars) {
-            if (car.getPosition().getValue() > maxPosition) {
-                maxPosition = car.getPosition().getValue();
+            if (car.getPositionValue() > maxPosition) {
+                maxPosition = car.getPositionValue();
             }
         }
         return maxPosition;
@@ -58,7 +58,7 @@ public class Cars {
     private List<Car> findSamePositionCars(int pivotPosition) {
         return this.racingCars
                 .stream()
-                .filter(car -> car.getPosition().getValue() == pivotPosition)
+                .filter(car -> car.getPositionValue() == pivotPosition)
                 .collect(Collectors.toList());
     }
 

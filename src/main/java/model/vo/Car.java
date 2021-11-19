@@ -25,14 +25,18 @@ public class Car {
         return position;
     }
 
-    public boolean equalsDistance(final Car car) {
-        return this.position.equals(car.position);
-    }
-
     public void move(final boolean movable) {
         if (movable) {
             this.position = this.position.move(ONE_STEP);
         }
+    }
+
+    public int getPositionValue(){
+        return this.position.getValue();
+    }
+
+    public String getNameValue(){
+        return this.name.getValue();
     }
 
     @Override
