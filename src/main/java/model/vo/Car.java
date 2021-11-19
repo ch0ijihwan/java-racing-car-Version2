@@ -47,4 +47,12 @@ public class Car {
     public int hashCode() {
         return Objects.hash(position, name);
     }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "position=" + position +
+                ", name=" + name +
+                '}';
+    }
 }
