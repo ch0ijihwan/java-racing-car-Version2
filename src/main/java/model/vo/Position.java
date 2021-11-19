@@ -3,7 +3,7 @@ package model.vo;
 import java.util.Objects;
 
 public class Position {
-    private int value;
+    private final int value;
 
     public Position(final int value) {
         validatePosition(value);
