@@ -3,7 +3,7 @@ package model.movement;
 import java.util.Random;
 
 public class RandomMovementStrategy implements MovementStrategy {
-    Random RANDOM = new Random();
+    private final Random random = new Random();
 
     @Override
     public boolean generateMovement() {
