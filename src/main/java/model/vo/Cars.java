@@ -48,8 +48,9 @@ public class Cars {
     private int findMaxPosition() {
         int maxPosition = 0;
         for (Car car : this.racingCars) {
-            if (car.getPositionValue() > maxPosition) {
-                maxPosition = car.getPositionValue();
+            int carPosition = car.getPositionValue();
+            if (carPosition > maxPosition) {
+                maxPosition = carPosition;
             }
         }
         return maxPosition;
