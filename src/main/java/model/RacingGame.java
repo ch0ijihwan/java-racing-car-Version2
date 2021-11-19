@@ -8,6 +8,7 @@ import model.vo.RoundCount;
 import java.util.List;
 
 public class RacingGame {
+    private static final int GAME_OVER = 0;
     private final Cars cars;
     private final MovementStrategy movementStrategy;
     private RoundCount roundCount;
@@ -24,7 +25,7 @@ public class RacingGame {
     }
 
     public List<Car> getWinners() {
-        return cars.winners();
+        return cars.getWinnerCars();
     }
 
     public void raceOneRound() {
@@ -40,7 +41,7 @@ public class RacingGame {
     }
 
     public boolean isNotOver() {
-        return roundCount.getRoundCount() != 0;
+        return roundCount.getRoundCount() != GAME_OVER;
     }
 
     public void endOneRound() {
