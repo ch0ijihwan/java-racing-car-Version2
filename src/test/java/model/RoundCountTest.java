@@ -38,7 +38,7 @@ class RoundCountTest {
     }
 
     @Test
-    @DisplayName("getRountCount 실행 시, roundCount 를 int 형으로 반환한다.")
+    @DisplayName("getRoundCount 실행 시, roundCount 를 int 형으로 반환한다.")
     void getRoundCount(){
         //given
         int input = 3;
