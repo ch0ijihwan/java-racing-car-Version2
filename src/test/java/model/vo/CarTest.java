@@ -6,9 +6,41 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class CarTest {
     private Car car;
+
+    @Test
+    @DisplayName("from() 호출 시, 파라미터로 부터 입력 받은 name 값으로 이름을 가지며 자동차의 포지션을 0으로 가진 Car 객체를 생성한다.")
+    void from() {
+        //given
+        String inputtedName = "apple";
+        int expectedPosition = 0;
+
+        //when
+        Car actual = Car.from(inputtedName);
+
+        //then
+        assertThat(actual).isEqualTo(Car.of(inputtedName, expectedPosition));
+    }
+
+    @Test
+    @DisplayName("of() 호출 시, 파라미터로 부터 입력 받은 name 과 position 을 가진 Car 객체를 생성한다.")
+    void of() {
+        //given
+        String inputtedName = "apple";
+        int inputtedPosition = 1;
+
+        //when
+        Car actual = Car.of(inputtedName, inputtedPosition);
+
+        //then
+        assertAll(
+                () -> assertThat(actual.getName()).isEqualTo(new Name(inputtedName)),
+                () -> assertThat(actual.getPosition()).isEqualTo(new Position(inputtedPosition))
+        );
+    }
 
     @Test
     @DisplayName("getPosition() 호출 시, position 객체를 반환한다.")
