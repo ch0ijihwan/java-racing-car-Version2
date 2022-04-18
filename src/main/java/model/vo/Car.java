@@ -2,7 +2,7 @@ package model.vo;
 
 import java.util.Objects;
 
-public class Car {
+public class Car implements Comparable<Car> {
     private static final int ONE_STEP = 1;
     private static final int START_POSITION = 0;
     private final Name name;
@@ -16,7 +16,7 @@ public class Car {
         return new Car(name, position);
     }
 
-    private Car(final String name,final int position) {
+    private Car(final String name, final int position) {
         this.name = new Name(name);
         this.position = new Position(position);
     }
@@ -54,5 +54,10 @@ public class Car {
                 "name=" + name +
                 ", position=" + position +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Car o) {
+        return o.getPosition().getValue() - getPosition().getValue();
     }
 }
