@@ -14,7 +14,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class PositionTest {
     @Test
-    @DisplayName("getValue() 호출 시, value 를 반환한다. ")
+    @DisplayName("getValue() 호출 시, value 를 반환한다.")
     void getValue() {
         //given
         final int inputtedValue = 1;
