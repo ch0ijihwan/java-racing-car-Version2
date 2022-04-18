@@ -3,34 +3,42 @@ package model.vo;
 import java.util.Objects;
 
 public class Position {
-    private final int value;
+    private int value;
 
     public Position(final int value) {
-        validatePosition(value);
+        validatePositionRange(value);
         this.value = value;
     }
 
-    public Position move(final int movement) {
-        value = value + movement;
-        return this;
+    private void validatePositionRange(final int value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("Position 은 음수가 될 수 없습니다.");
+        }
     }
 
-    public int getValue() {
+    public final int getValue() {
         return value;
     }
 
-    private void validatePosition(final int position) {
-        if (position < 0) {
-            throw new IllegalArgumentException("Position 값이 음수입니다.");
-        }
+    public int increasePosition(final int incrementalValue) {
+        this.value += incrementalValue;
+        return value;
+    }
+
+    public boolean isFatherThan(final Position anotherPosition) {
+        return this.value > anotherPosition.value;
+    }
+
+    public boolean isSame(final Position anotherPosition) {
+        return this.value == anotherPosition.value;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Position position1 = (Position) o;
-        return value == position1.value;
+        Position position = (Position) o;
+        return value == position.value;
     }
 
     @Override
