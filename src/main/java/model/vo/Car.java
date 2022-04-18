@@ -9,12 +9,16 @@ public class Car {
     private final Position position;
 
     public static Car from(final String name) {
-        return new Car(name);
+        return of(name, START_POSITION);
     }
 
-    private Car(final String name) {
+    public static Car of(final String name, final int position) {
+        return new Car(name, position);
+    }
+
+    private Car(final String name,final int position) {
         this.name = new Name(name);
-        this.position = new Position(START_POSITION);
+        this.position = new Position(position);
     }
 
     public Name getName() {
