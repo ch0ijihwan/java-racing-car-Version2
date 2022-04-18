@@ -2,9 +2,7 @@ package model.vo;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
@@ -52,34 +50,6 @@ class PositionTest {
 
         //then
         assertThat(actualValue).isEqualTo(expectedValue);
-    }
-
-    @ParameterizedTest
-    @MethodSource("createPositionComparisonParameterProvider")
-    @DisplayName("isFartherThan() 호출 시, 파라미터로 부터 입려 받은 Position 객체와 위치를 비교하여, 더 클 경우 true 를 반환한다.")
-    void isFartherThan(final Position position, final Position anotherPosition, final boolean expect) {
-        //when
-        boolean actual = position.isFatherThan(anotherPosition);
-
-        //then
-        assertThat(actual).isEqualTo(expect);
-    }
-
-    static Stream<Arguments> createPositionComparisonParameterProvider() {
-        return Stream.of(
-                arguments(new Position(1), new Position(2), false,
-                        arguments(new Position(2), new Position(1), true))
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("createSameOrNotSamePositionsParameterProvider")
-    @DisplayName("isSame() 호출 시, 거리를 비교하여 같으면 true 를 반환 그렇지 않으면 false 를 반환")
-    void isSame(final Position position, final Position anotherPosition, final boolean expect) {
-        //when
-        boolean actual = position.isSame(anotherPosition);
-        //then
-        assertThat(actual).isEqualTo(expect);
     }
 
     static Stream<Arguments> createSameOrNotSamePositionsParameterProvider() {

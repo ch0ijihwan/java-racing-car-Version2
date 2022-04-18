@@ -25,14 +25,6 @@ public class Position {
         return value;
     }
 
-    public boolean isFatherThan(final Position anotherPosition) {
-        return this.value > anotherPosition.value;
-    }
-
-    public boolean isSame(final Position anotherPosition) {
-        return this.value == anotherPosition.value;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
