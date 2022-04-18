@@ -57,7 +57,7 @@ class PositionTest {
     @ParameterizedTest
     @MethodSource("createPositionComparisonParameterProvider")
     @DisplayName("isFartherThan() 호출 시, 파라미터로 부터 입려 받은 Position 객체와 위치를 비교하여, 더 클 경우 true 를 반환한다.")
-    void isFartherThan(Position position, Position anotherPosition, boolean expect) {
+    void isFartherThan(final Position position, final Position anotherPosition, final boolean expect) {
         //when
         boolean actual = position.isFatherThan(anotherPosition);
 
@@ -75,7 +75,7 @@ class PositionTest {
     @ParameterizedTest
     @MethodSource("createSameOrNotSamePositionsParameterProvider")
     @DisplayName("isSame() 호출 시, 거리를 비교하여 같으면 true 를 반환 그렇지 않으면 false 를 반환")
-    void isSame(Position position, Position anotherPosition, boolean expect) {
+    void isSame(final Position position, final Position anotherPosition, final boolean expect) {
         //when
         boolean actual = position.isSame(anotherPosition);
         //then
