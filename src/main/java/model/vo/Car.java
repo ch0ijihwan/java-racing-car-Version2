@@ -5,16 +5,16 @@ import java.util.Objects;
 public class Car {
     private static final int ONE_STEP = 1;
     private static final int START_POSITION = 0;
-    private Position position;
     private final Name name;
+    private final Position position;
 
-    public Car(final String name) {
-        this(name, START_POSITION);
+    public static Car from(final String name) {
+        return new Car(name);
     }
 
-    public Car(final String name, final int position) {
+    private Car(final String name) {
         this.name = new Name(name);
-        this.position = new Position(position);
+        this.position = new Position(START_POSITION);
     }
 
     public Name getName() {
@@ -27,16 +27,8 @@ public class Car {
 
     public void move(final boolean movable) {
         if (movable) {
-            this.position = this.position.move(ONE_STEP);
+            position.increasePosition(ONE_STEP);
         }
-    }
-
-    public int getPositionValue(){
-        return this.position.getValue();
-    }
-
-    public String getNameValue(){
-        return this.name.getValue();
     }
 
     @Override
@@ -44,19 +36,19 @@ public class Car {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return Objects.equals(position, car.position) && Objects.equals(name, car.name);
+        return Objects.equals(name, car.name) && Objects.equals(position, car.position);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(position, name);
+        return Objects.hash(name, position);
     }
 
     @Override
     public String toString() {
         return "Car{" +
-                "position=" + position +
-                ", name=" + name +
+                "name=" + name +
+                ", position=" + position +
                 '}';
     }
 }
