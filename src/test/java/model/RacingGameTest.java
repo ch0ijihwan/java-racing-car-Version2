@@ -17,6 +17,14 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 class RacingGameTest {
     private RacingGame racingGame;
+    private final MovementStrategy testMovementStrategy = new alwaysMove();
+    static class alwaysMove implements MovementStrategy {
+        @Override
+        public boolean generateMovable() {
+            return true;
+        }
+    }
+
 
     @Test
     @DisplayName("객체 생성 시, 파라미터로 부터 입력받은 자동차 이름들과 시도 횟수를 기반으로 , Cars 객체와 NumberOfAttempt 객체를 만든다.")
@@ -39,28 +47,23 @@ class RacingGameTest {
         //given
         String[] inputtedNames = new String[]{"apple", "hi"};
         int inputtedNumberOfAttempt = 2;
-        List<Car> expectedCars = List.of(Car.of("apple", 1), Car.of("hi", 1));
+        Cars expectedCars = new Cars(List.of(Car.of("apple", 1), Car.of("hi", 1)));
         NumberOfAttempt expectedNumberOfAttempt = new NumberOfAttempt(1);
         racingGame = new RacingGame(inputtedNames, inputtedNumberOfAttempt);
 
         //when
-        racingGame.playOneRound(new alwaysMove());
+        racingGame.playOneRound(testMovementStrategy);
 
         //then
         assertAll(
                 () -> assertThat(racingGame)
                         .extracting("racingCars")
-                        .extracting("cars").isEqualTo(expectedCars),
-                () -> assertThat(racingGame).extracting("numberOfAttempt").isEqualTo(expectedNumberOfAttempt)
+                        .isEqualTo(expectedCars),
+                () -> assertThat(racingGame).extracting("numberOfAttempt")
+                        .isEqualTo(expectedNumberOfAttempt)
         );
     }
 
-    static class alwaysMove implements MovementStrategy {
-        @Override
-        public boolean generateMovable() {
-            return true;
-        }
-    }
 
     @ParameterizedTest
     @DisplayName("isGameEnd() 호출 시, 게임이 끝났으면 true 를 반환 그렇지 않으면 false 를 반환한다.")
@@ -69,7 +72,7 @@ class RacingGameTest {
         //given
         String[] inputtedNames = new String[]{"apple", "hi"};
         racingGame = new RacingGame(inputtedNames, inputtedNumberOfAttempt);
-        racingGame.playOneRound(new alwaysMove());
+        racingGame.playOneRound(testMovementStrategy);
 
         //when
         boolean actual = racingGame.isGameEnd();
