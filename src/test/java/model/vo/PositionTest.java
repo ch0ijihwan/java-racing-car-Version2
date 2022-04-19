@@ -2,13 +2,9 @@ package model.vo;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.provider.Arguments;
-
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class PositionTest {
     @Test
@@ -50,12 +46,5 @@ class PositionTest {
 
         //then
         assertThat(actualValue).isEqualTo(expectedValue);
-    }
-
-    static Stream<Arguments> createSameOrNotSamePositionsParameterProvider() {
-        return Stream.of(
-                arguments(new Position(1), new Position(1), true),
-                arguments(new Position(1), new Position(2), false)
-        );
     }
 }
