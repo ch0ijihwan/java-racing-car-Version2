@@ -27,8 +27,8 @@ class NumberOfAttemptTest {
     @DisplayName("decrease() 호출 시, 시도 횟수를 하나 줄인다.")
     void decrease() {
         //given
-        int inputtedValue = 1;
-        int expectedValue = 0;
+        int inputtedValue = 2;
+        int expectedValue = 1;
         NumberOfAttempt numberOfAttempt = new NumberOfAttempt(inputtedValue);
 
         //when
@@ -44,6 +44,7 @@ class NumberOfAttemptTest {
     void isEnd(final int inputtedValue, final boolean expect) {
         //given
         NumberOfAttempt numberOfAttempt = new NumberOfAttempt(inputtedValue);
+        numberOfAttempt.decrease();
 
         //when
         boolean actual = numberOfAttempt.isEnd();
