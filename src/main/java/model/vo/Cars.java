@@ -18,7 +18,7 @@ public class Cars {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    protected Cars(final List<Car> cars) {
+    public Cars(final List<Car> cars) {
         this.cars = cars;
     }
 
