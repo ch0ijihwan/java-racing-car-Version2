@@ -9,71 +9,66 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Cars {
-    private final List<Car> racingCars;
+    private final List<Car> cars;
 
-    public Cars(final String[] inputtedNames) {
-        validateDuplicationNames(inputtedNames);
-        racingCars = Arrays.stream(inputtedNames)
-                .map(Car::new)
-                .collect(Collectors.toList());
+    public Cars(final String[] names) {
+        validateDuplicationOfNames(names);
+        cars = Arrays.stream(names)
+                .map(Car::from)
+                .collect(Collectors.toUnmodifiableList());
     }
 
-    public Cars(final List<Car> inputedCars) {
-        racingCars = inputedCars;
+    protected Cars(final List<Car> cars) {
+        this.cars = cars;
     }
 
-    public List<Car> getRacingCars() {
-        return racingCars;
-    }
-
-    public void moveAll(final MovementStrategy movementStrategy) {
-        racingCars.forEach(car -> car.move(movementStrategy.generateMovable()));
-    }
-
-    private void validateDuplicationNames(final String[] tokens) {
-        if (hasDuplication(tokens)) {
-            throw new IllegalArgumentException("자동차의 이름은 중복 될 수 없습니다.");
+    private void validateDuplicationOfNames(final String[] names) {
+        if (Arrays.stream(names).distinct().count() != names.length) {
+            throw new IllegalArgumentException("입력 받은 차 이름 중 중복이 있습니다.");
         }
     }
 
-    private boolean hasDuplication(final String[] tokens) {
-        return tokens.length != Arrays.stream(tokens).distinct().count();
+    public void moveAllCar(final MovementStrategy movementStrategy) {
+        cars.forEach(car -> car.move(movementStrategy.generateMovable()));
     }
 
-    public List<Car> getWinnerCars() {
-        int mostFarPosiotion = findMaxPosition();
-        return findSamePositionCars(mostFarPosiotion);
+    public List<Car> getWinners() {
+        List<Car> sortedCars = sortByPositionValue(this.cars);
+        int topRecordIndex = sortedCars.size() - 1;
+        Position topRecordPosition = sortedCars.get(topRecordIndex)
+                .getPosition();
+        return findCarsWithSameRecord(topRecordPosition);
     }
 
-    private int findMaxPosition() {
-        int maxPosition = 0;
-        for (Car car : this.racingCars) {
-            int carPosition = car.getPositionValue();
-            if (carPosition > maxPosition) {
-                maxPosition = carPosition;
-            }
-        }
-        return maxPosition;
+    private List<Car> sortByPositionValue(final List<Car> cars) {
+        return cars.stream()
+                .sorted(Comparator.comparing(car -> car.getPosition().getValue()))
+                .collect(Collectors.toUnmodifiableList());
     }
 
-    private List<Car> findSamePositionCars(int pivotPosition) {
-        return this.racingCars
-                .stream()
-                .filter(car -> car.getPositionValue() == pivotPosition)
-                .collect(Collectors.toList());
+    private List<Car> findCarsWithSameRecord(final Position topRecordPosition) {
+        return cars.stream()
+                .filter(car -> car.getPosition().equals(topRecordPosition))
+                .collect(Collectors.toUnmodifiableList());
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Cars cars = (Cars) o;
-        return Objects.equals(racingCars, cars.racingCars);
+        Cars cars1 = (Cars) o;
+        return Objects.equals(cars, cars1.cars);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(racingCars);
+        return Objects.hash(cars);
+    }
+
+    @Override
+    public String toString() {
+        return "Cars{" +
+                "cars=" + cars +
+                '}';
     }
 }
-
