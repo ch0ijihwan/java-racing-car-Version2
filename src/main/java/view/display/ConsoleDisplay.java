@@ -16,7 +16,7 @@ public class ConsoleDisplay implements Display {
         System.out.println("실행 결과");
 
         for (int i = 0; i < carNames.size(); i++) {
-            System.out.printf("%s : %s", carNames.get(i), generatePositionBars(carPositions, i));
+            System.out.printf("%s : %s %n", carNames.get(i), generatePositionBars(carPositions, i));
         }
     }
 
@@ -27,7 +27,8 @@ public class ConsoleDisplay implements Display {
     @Override
     public void printWinners(final WinnersDto winnersDto) {
         List<String> winners = winnersDto.getNames();
+
         String winnerNames = String.join(CAR_NAMES_DELIMITER, winners);
-        System.out.println(winnerNames);
+        System.out.println(winnerNames + "가 최종 우승 했습니다.");
     }
 }
