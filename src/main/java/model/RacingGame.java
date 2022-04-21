@@ -46,4 +46,8 @@ public class RacingGame {
     public int hashCode() {
         return Objects.hash(racingCars, numberOfAttempt);
     }
+
+    public List<Car> getCarsDuringRacing() {
+        return racingCars.getCars();
+    }
 }
