@@ -14,7 +14,6 @@ public class ConsoleDisplay implements Display {
         List<String> carNames = carsDto.getCarNames();
         List<Integer> carPositions = carsDto.getCarPositions();
         System.out.println("실행 결과");
-
         for (int i = 0; i < carNames.size(); i++) {
             System.out.printf("%s : %s %n", carNames.get(i), generatePositionBars(carPositions, i));
         }
