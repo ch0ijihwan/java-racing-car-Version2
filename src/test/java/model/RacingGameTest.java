@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 class RacingGameTest {
     private RacingGame racingGame;
     private final MovementStrategy testMovementStrategy = new alwaysMove();
+
     static class alwaysMove implements MovementStrategy {
         @Override
         public boolean generateMovable() {
@@ -89,6 +90,28 @@ class RacingGameTest {
     }
 
     @Test
+    @DisplayName("getCarsDuringRacing() 호출 시, 게임 내 자동차들의 리스트를 반환한다.")
+    void getCars() {
+        //given
+        Cars inputtedCars = new Cars(List.of(
+                Car.of("hello", 1),
+                Car.of("hi", 2),
+                Car.of("apple", 2)));
+        List<Car> expectedCars = List.of(
+                Car.of("hello", 1),
+                Car.of("hi", 2),
+                Car.of("apple", 2));
+        int inputtedNumberOfAttempts = 2;
+        racingGame = new RacingGame(inputtedCars, inputtedNumberOfAttempts);
+
+        //when
+        List<Car> actual = racingGame.getCarsDuringRacing();
+
+        //then
+        assertThat(actual).isEqualTo(expectedCars);
+    }
+
+    @Test
     @DisplayName("getWinners() 호출 시, 우승자로 구성된 Car 리스트를 반환한다.")
     void getWinners() {
         //given
@@ -103,7 +126,7 @@ class RacingGameTest {
         racingGame = new RacingGame(inputtedCars, inputtedNumberOfAttempt);
 
         //when
-        List<Car> actualWinners =  racingGame.getWinners();
+        List<Car> actualWinners = racingGame.getWinners();
 
         //then
         assertThat(actualWinners).containsAll(expectedWinners);
