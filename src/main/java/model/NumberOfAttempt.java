@@ -3,7 +3,8 @@ package model;
 import java.util.Objects;
 
 public class NumberOfAttempt {
-    private static final int MIN_VALUE = 0;
+    private static final int END_POINT = 0;
+    private static final int MIN_NUMBER_OF_ATTEMPT = 1;
     private int value;
 
     public NumberOfAttempt(final int value) {
@@ -12,13 +13,13 @@ public class NumberOfAttempt {
     }
 
     private void validatePositiveValue(final int value) {
-        if (value < 1) {
+        if (value < MIN_NUMBER_OF_ATTEMPT) {
             throw new IllegalArgumentException("시도 횟수는 양수여야 합니다.");
         }
     }
 
     public boolean isEnd() {
-        return value == MIN_VALUE;
+        return value == END_POINT;
     }
 
     public void decrease() {
