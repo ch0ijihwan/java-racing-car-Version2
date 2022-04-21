@@ -9,7 +9,7 @@ public class ConsoleInput implements Input {
 
     @Override
     public String[] inputCarNames() {
-        System.out.println("경주할 자동 이름을 입력하세(이름은 쉼표(,)를 기준으로 구분).");
+        System.out.println("경주할 자동 이름을 입력하세요 (이름은 쉼표(,)를 기준으로 구분).");
         String inputtedValue = SCANNER.nextLine();
         hasDelimiter(inputtedValue);
         hasNullOrBlank(inputtedValue);
@@ -33,6 +33,6 @@ public class ConsoleInput implements Input {
         System.out.println("시도 횟수는 몇회인가요?");
         String inputtedNumberOfAttempt = SCANNER.nextLine();
         hasNullOrBlank(inputtedNumberOfAttempt);
-        return Integer.getInteger(inputtedNumberOfAttempt);
+        return Integer.parseInt(inputtedNumberOfAttempt);
     }
 }
