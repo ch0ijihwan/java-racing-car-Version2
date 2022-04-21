@@ -23,13 +23,23 @@ public class Cars {
     }
 
     private void validateDuplicationOfNames(final String[] names) {
-        if (Arrays.stream(names).distinct().count() != names.length) {
+        if (hsaDuplication(names)) {
             throw new IllegalArgumentException("입력 받은 차 이름 중 중복이 있습니다.");
         }
     }
 
+    private boolean hsaDuplication(final String[] names) {
+        return Arrays.stream(names)
+                .distinct()
+                .count() != names.length;
+    }
+
     public void moveAllCar(final MovementStrategy movementStrategy) {
         cars.forEach(car -> car.move(movementStrategy.generateMovable()));
+    }
+
+    public List<Car> getCars() {
+        return cars;
     }
 
     public List<Car> getWinners() {
