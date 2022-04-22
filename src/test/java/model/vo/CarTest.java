@@ -47,12 +47,13 @@ class CarTest {
     void getPosition() {
         //given
         car = Car.from("apple");
+        Position expect = Position.from(0);
 
         //when
         Position actual = car.getPosition();
 
         //then
-        assertThat(actual).isEqualTo(Position.from(0));
+        assertThat(actual).isEqualTo(expect);
     }
 
     @Test
