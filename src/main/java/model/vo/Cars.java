@@ -2,10 +2,7 @@ package model.vo;
 
 import model.movement.MovementStrategy;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Cars {
@@ -19,7 +16,7 @@ public class Cars {
     }
 
     public Cars(final List<Car> cars) {
-        this.cars = cars;
+        this.cars = new ArrayList<>(cars);
     }
 
     private void validateDuplicationOfNames(final String[] names) {
@@ -39,7 +36,7 @@ public class Cars {
     }
 
     public List<Car> getCars() {
-        return cars;
+        return Collections.unmodifiableList(cars);
     }
 
     public List<Car> getWinners() {
@@ -52,7 +49,7 @@ public class Cars {
 
     private List<Car> sortByPositionValue(final List<Car> cars) {
         return cars.stream()
-                .sorted(Comparator.comparing(car -> car.getPosition().getValue()))
+                .sorted(Comparator.comparing(Car::getPosition))
                 .collect(Collectors.toUnmodifiableList());
     }
 
