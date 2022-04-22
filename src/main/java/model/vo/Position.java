@@ -2,7 +2,7 @@ package model.vo;
 
 import java.util.Objects;
 
-public class Position {
+public class Position implements Comparable<Position> {
     private int value;
 
     public Position(final int value) {
@@ -23,6 +23,11 @@ public class Position {
     public int increasePosition(final int incrementalValue) {
         this.value += incrementalValue;
         return value;
+    }
+
+    @Override
+    public int compareTo(Position otherPosition) {
+        return getValue() - otherPosition.getValue();
     }
 
     @Override
