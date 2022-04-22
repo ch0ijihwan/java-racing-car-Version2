@@ -12,13 +12,21 @@ public class RacingGame {
     private final NumberOfAttempt numberOfAttempt;
 
     public RacingGame(final String[] inputtedNames, final int inputtedNumberOfAttempt) {
+        validateNull(inputtedNames);
         this.racingCars = new Cars(inputtedNames);
         this.numberOfAttempt = new NumberOfAttempt(inputtedNumberOfAttempt);
     }
 
     public RacingGame(final Cars inputtedCars, final int numberOfAttempt) {
+        validateNull(inputtedCars);
         this.racingCars = inputtedCars;
         this.numberOfAttempt = new NumberOfAttempt(numberOfAttempt);
+    }
+
+    private void validateNull(final Object inputtedNames) {
+        if (inputtedNames == null) {
+            throw new IllegalArgumentException("null 값이 입력되었습니다.");
+        }
     }
 
     public List<Car> getWinners() {
