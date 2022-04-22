@@ -18,7 +18,7 @@ public class Car {
 
     private Car(final String name, final int position) {
         this.name = new Name(name);
-        this.position = new Position(position);
+        this.position = Position.from(position);
     }
 
     public Name getName() {

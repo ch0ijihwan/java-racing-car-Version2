@@ -13,7 +13,7 @@ class PositionTest {
         //given
         final int inputtedValue = 1;
         final int expectedValue = 1;
-        Position position = new Position(inputtedValue);
+        Position position = Position.from(inputtedValue);
 
         //when
         int actualValue = position.getValue();
@@ -29,7 +29,7 @@ class PositionTest {
         int inputtedValue = -1;
 
         //then
-        assertThatThrownBy(() -> new Position(inputtedValue)).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> Position.from(inputtedValue)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Position 은 음수가 될 수 없습니다.");
     }
 
@@ -37,9 +37,9 @@ class PositionTest {
     @DisplayName("increasePosition() 호출 시, 파라미터로 부터 입력받은 값 만큼을 증가시킨 Position 을 반환한다.")
     void increasePosition() {
         //given
-        Position position = new Position(1);
+        Position position = Position.from(1);
         int incrementalValue = 2;
-        Position expectedPosition = new Position(3);
+        Position expectedPosition = Position.from(3);
 
         //when
         Position actualValue = position.increasePosition(incrementalValue);

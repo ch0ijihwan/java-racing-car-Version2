@@ -38,7 +38,7 @@ class CarTest {
         //then
         assertAll(
                 () -> assertThat(actual.getName()).isEqualTo(new Name(inputtedName)),
-                () -> assertThat(actual.getPosition()).isEqualTo(new Position(inputtedPosition))
+                () -> assertThat(actual.getPosition()).isEqualTo(Position.from(inputtedPosition))
         );
     }
 
@@ -52,7 +52,7 @@ class CarTest {
         Position actual = car.getPosition();
 
         //then
-        assertThat(actual).isEqualTo(new Position(0));
+        assertThat(actual).isEqualTo(Position.from(0));
     }
 
     @Test
@@ -75,7 +75,7 @@ class CarTest {
     void move(final boolean movable, final int expectedPositionValue) {
         //given
         car = Car.from("apple");
-        Position expectedPosition = new Position(expectedPositionValue);
+        Position expectedPosition = Position.from(expectedPositionValue);
 
         //when
         car.move(movable);

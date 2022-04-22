@@ -1,17 +1,34 @@
 package model.vo;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class Position implements Comparable<Position> {
+    private static final int MAXIMUM_POSITION_VALUE = 50;
+    private static final int MINIMUM_POSITION_VALUE = 0;
+    private static final Map<Integer, Position> positions = new HashMap<>();
     private final int value;
 
-    public Position(final int value) {
-        validatePositionRange(value);
-        this.value = value;
+    static {
+        IntStream.range(0, MAXIMUM_POSITION_VALUE)
+                .forEach(positionValue -> positions.put(positionValue, new Position(positionValue)));
     }
 
-    private void validatePositionRange(final int value) {
-        if (value < 0) {
+    static Position from(final int value) {
+        validatePositionRange(value);
+        return positions.get(value);
+    }
+
+    private Position(final int value) {
+        validatePositionRange(value);
+        this.value = value;
+
+    }
+
+    private static void validatePositionRange(final int value) {
+        if (value < MINIMUM_POSITION_VALUE) {
             throw new IllegalArgumentException("Position 은 음수가 될 수 없습니다.");
         }
     }
@@ -21,7 +38,7 @@ public class Position implements Comparable<Position> {
     }
 
     public Position increasePosition(final int incrementalValue) {
-        return new Position(value + incrementalValue);
+        return Position.from(value + incrementalValue);
     }
 
     @Override
