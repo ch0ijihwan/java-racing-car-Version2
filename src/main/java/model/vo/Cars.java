@@ -23,12 +23,12 @@ public class Cars {
     }
 
     private void validateDuplicationOfNames(final String[] names) {
-        if (hsaDuplication(names)) {
+        if (hasDuplication(names)) {
             throw new IllegalArgumentException("입력 받은 차 이름 중 중복이 있습니다.");
         }
     }
 
-    private boolean hsaDuplication(final String[] names) {
+    private boolean hasDuplication(final String[] names) {
         return Arrays.stream(names)
                 .distinct()
                 .count() != names.length;
