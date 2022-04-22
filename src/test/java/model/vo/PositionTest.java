@@ -34,17 +34,17 @@ class PositionTest {
     }
 
     @Test
-    @DisplayName("increasePosition() 호출 시, 파라미터로 부터 입력받은 값 만큼 현재 value 값을 증가 시킨다.")
+    @DisplayName("increasePosition() 호출 시, 파라미터로 부터 입력받은 값 만큼을 증가시킨 Position 을 반환한다.")
     void increasePosition() {
         //given
         Position position = new Position(1);
         int incrementalValue = 2;
-        int expectedValue = 3;
+        Position expectedPosition = new Position(3);
 
         //when
-        int actualValue = position.increasePosition(incrementalValue);
+        Position actualValue = position.increasePosition(incrementalValue);
 
         //then
-        assertThat(actualValue).isEqualTo(expectedValue);
+        assertThat(actualValue).isEqualTo(expectedPosition);
     }
 }

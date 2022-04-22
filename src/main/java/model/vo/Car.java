@@ -6,7 +6,7 @@ public class Car {
     private static final int ONE_STEP = 1;
     private static final int START_POSITION = 0;
     private final Name name;
-    private final Position position;
+    private Position position;
 
     public static Car from(final String name) {
         return of(name, START_POSITION);
@@ -31,7 +31,7 @@ public class Car {
 
     public void move(final boolean movable) {
         if (movable) {
-            position.increasePosition(ONE_STEP);
+            this.position = position.increasePosition(ONE_STEP);
         }
     }
 

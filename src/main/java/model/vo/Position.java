@@ -3,7 +3,7 @@ package model.vo;
 import java.util.Objects;
 
 public class Position implements Comparable<Position> {
-    private int value;
+    private final int value;
 
     public Position(final int value) {
         validatePositionRange(value);
@@ -20,9 +20,8 @@ public class Position implements Comparable<Position> {
         return value;
     }
 
-    public int increasePosition(final int incrementalValue) {
-        this.value += incrementalValue;
-        return value;
+    public Position increasePosition(final int incrementalValue) {
+        return new Position(value + incrementalValue);
     }
 
     @Override
