@@ -63,8 +63,7 @@ class RacingGameTest {
         int inputtedNumberOfAttempt = 2;
 
         //when
-        assertThatThrownBy(() -> new RacingGame(inputtedNames, inputtedNumberOfAttempt))
-                .isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> new RacingGame(inputtedNames, inputtedNumberOfAttempt)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("null 값이 입력되었습니다.");
     }
 
@@ -87,8 +86,7 @@ class RacingGameTest {
 
         //then
         assertAll(
-                () -> assertThat(racingGame)
-                        .extracting("racingCars")
+                () -> assertThat(racingGame).extracting("racingCars")
                         .isEqualTo(expectedCars),
                 () -> assertThat(racingGame).extracting("numberOfAttempt")
                         .isEqualTo(expectedNumberOfAttempt)
@@ -98,7 +96,7 @@ class RacingGameTest {
     @ParameterizedTest
     @DisplayName("isGameEnd() 호출 시, 게임이 끝났으면 true 를 반환 그렇지 않으면 false 를 반환한다.")
     @MethodSource("createNumberOfAttemptParameterProvider")
-    void isGameEnd(int inputtedNumberOfAttempt, boolean expect) {
+    void isGameEnd(final int inputtedNumberOfAttempt, final boolean expect) {
         //given
         racingGame = new RacingGame(names, inputtedNumberOfAttempt);
         racingGame.playOneRound(testMovementStrategy);
