@@ -18,8 +18,7 @@ class NumberOfAttemptTest {
     @ValueSource(ints = {-1, 0})
     void validateForPositiveValue(final int inputtedValue) {
         //then
-        assertThatThrownBy(() -> new NumberOfAttempt(inputtedValue))
-                .isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> new NumberOfAttempt(inputtedValue)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("시도 횟수는 양수여야 합니다.");
     }
 
@@ -55,8 +54,7 @@ class NumberOfAttemptTest {
 
     static Stream<Arguments> createNumberOfAttemptsValueParameterProvider() {
         return Stream.of(
-                Arguments.of(1, true),
-                Arguments.of(2, false)
+                Arguments.of(1, true),Arguments.of(2, false)
         );
     }
 }
