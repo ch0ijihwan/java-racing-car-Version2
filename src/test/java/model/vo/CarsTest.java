@@ -27,8 +27,7 @@ class CarsTest {
         String[] inputtedCarNames = new String[]{"hello", "hello"};
 
         //then
-        assertThatThrownBy(() -> new Cars(inputtedCarNames))
-                .isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> new Cars(inputtedCarNames)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("입력 받은 차 이름 중 중복이 있습니다.");
     }
 
