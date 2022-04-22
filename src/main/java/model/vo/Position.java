@@ -18,7 +18,7 @@ public class Position implements Comparable<Position> {
 
     static Position from(final int value) {
         validatePositionRange(value);
-        return positions.get(value);
+        return positions.getOrDefault(value, new Position(value));
     }
 
     private Position(final int value) {
