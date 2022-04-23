@@ -6,13 +6,13 @@ import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class Position implements Comparable<Position> {
-    private static final int MAXIMUM_POSITION_VALUE = 50;
+    private static final int MAXIMUM_VALUE_OF_FREQUENTLY_USED_POSITION = 50;
     private static final int MINIMUM_POSITION_VALUE = 0;
     private static final Map<Integer, Position> positions = new HashMap<>();
     private final int value;
 
     static {
-        IntStream.range(0, MAXIMUM_POSITION_VALUE)
+        IntStream.range(MINIMUM_POSITION_VALUE, MAXIMUM_VALUE_OF_FREQUENTLY_USED_POSITION)
                 .forEach(positionValue -> positions.put(positionValue, new Position(positionValue)));
     }
 
