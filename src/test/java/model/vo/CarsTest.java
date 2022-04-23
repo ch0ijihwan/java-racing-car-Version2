@@ -50,12 +50,12 @@ class CarsTest {
     @DisplayName("getWinners() 호출 시, 자동차들 중 우승자의 이름을 뽑아 리스트 형태로 반환한다. 이때 우승자가 둘 이상일 경우 모두 다 반환한다.")
     void getWinners() {
         //given
-        List<Car> expectedWinners = List.of(Car.of("hello", 3), Car.of("hi", 3));
+        List<Car> expect = List.of(Car.of("hello", 3), Car.of("hi", 3));
 
         //when
-        List<Car> actualWinners = cars.getWinners();
+        List<Car> actual = cars.getWinners();
 
         //then
-        assertThat(actualWinners).containsAll(expectedWinners);
+        assertThat(actual).containsAll(expect);
     }
 }

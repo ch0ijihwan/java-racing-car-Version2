@@ -16,10 +16,10 @@ class PositionTest {
         Position position = Position.from(inputtedValue);
 
         //when
-        int actualValue = position.getValue();
+        int actual = position.getValue();
 
         //then
-        assertThat(actualValue).isEqualTo(expectedValue);
+        assertThat(actual).isEqualTo(expectedValue);
     }
 
     @Test

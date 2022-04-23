@@ -119,7 +119,7 @@ class RacingGameTest {
     @DisplayName("getCarsDuringRacing() 호출 시, 게임 내 자동차들의 리스트를 반환한다.")
     void getCars() {
         //given
-        List<Car> expectedCars = List.of(
+        List<Car> expect = List.of(
                 Car.of("hello", 1),
                 Car.of("hi", 2),
                 Car.of("apple", 2)
@@ -131,7 +131,7 @@ class RacingGameTest {
         List<Car> actual = racingGame.getCarsDuringRacing();
 
         //then
-        assertThat(actual).isEqualTo(expectedCars);
+        assertThat(actual).isEqualTo(expect);
     }
 
     @Test
@@ -139,7 +139,7 @@ class RacingGameTest {
     void getWinners() {
         //given
         int inputtedNumberOfAttempt = 1;
-        List<Car> expectedWinners = List.of(
+        List<Car> expect = List.of(
                 Car.of("hi", 2),
                 Car.of("apple", 2)
         );
@@ -149,6 +149,6 @@ class RacingGameTest {
         List<Car> actualWinners = racingGame.getWinners();
 
         //then
-        assertThat(actualWinners).containsAll(expectedWinners);
+        assertThat(actualWinners).containsAll(expect);
     }
 }

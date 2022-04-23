@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class WinnersDtoTest {
     @Test
-    @DisplayName("getNames() 호출 시, 우승자의 이름들을 리스트로 반환한다.")
+    @DisplayName("getNames() 호출 시, 입력 받았던 자동차들의 이름을 리스트로 반환한다.")
     void getNames() {
         //given
         List<Car> cars = List.of(Car.of("apple", 1), Car.of("hi", 1));
