@@ -4,8 +4,9 @@ import java.util.Objects;
 
 public class NumberOfAttempt {
     private static final int END_POINT = 0;
-    private static final int MIN_NUMBER_OF_ATTEMPT = 1;
-    private int value;
+    private static final int MIN_NUMBER_OF_ATTEMPT = 0;
+    private static final int SCALE_OF_DECREASE = 1;
+    private final int value;
 
     public NumberOfAttempt(final int value) {
         validatePositiveValue(value);
@@ -14,7 +15,7 @@ public class NumberOfAttempt {
 
     private void validatePositiveValue(final int value) {
         if (value < MIN_NUMBER_OF_ATTEMPT) {
-            throw new IllegalArgumentException("시도 횟수는 양수여야 합니다.");
+            throw new IllegalArgumentException("시도 횟수는 음수가 아니어야 합니다.");
         }
     }
 
@@ -22,8 +23,9 @@ public class NumberOfAttempt {
         return value == END_POINT;
     }
 
-    public void decrease() {
-        value--;
+    public NumberOfAttempt decrease() {
+        int decreasedValue = value - SCALE_OF_DECREASE;
+        return new NumberOfAttempt(decreasedValue);
     }
 
     @Override

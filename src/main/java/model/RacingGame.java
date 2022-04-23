@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class RacingGame {
     private final Cars racingCars;
-    private final NumberOfAttempt numberOfAttempt;
+    private NumberOfAttempt numberOfAttempt;
 
     public RacingGame(final String[] inputtedNames, final int inputtedNumberOfAttempt) {
         validateNull(inputtedNames);
@@ -35,7 +35,7 @@ public class RacingGame {
 
     public void playOneRound(final MovementStrategy movementStrategy) {
         racingCars.moveAllCar(movementStrategy);
-        numberOfAttempt.decrease();
+        numberOfAttempt = numberOfAttempt.decrease();
     }
 
     public boolean isGameEnd() {
