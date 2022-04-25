@@ -1,30 +1,29 @@
 package model.vo;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Position implements Comparable<Position> {
     private static final int MAXIMUM_VALUE_OF_FREQUENTLY_USED_POSITION = 50;
     private static final int MINIMUM_POSITION_VALUE = 0;
-    private static final Map<Integer, Position> positions = new HashMap<>();
+    private static final Map<Integer, Position> positions = createPositions();
     private final int value;
 
-    static {
-        IntStream.range(MINIMUM_POSITION_VALUE, MAXIMUM_VALUE_OF_FREQUENTLY_USED_POSITION)
-                .forEach(positionValue -> positions.put(positionValue, new Position(positionValue)));
+    private static Map<Integer, Position> createPositions() {
+        return IntStream.range(MINIMUM_POSITION_VALUE, MAXIMUM_VALUE_OF_FREQUENTLY_USED_POSITION)
+                .boxed()
+                .collect(Collectors.toUnmodifiableMap(key -> key, Position::new));
     }
 
-    static Position from(final int value) {
-        validatePositionRange(value);
+    public static Position from(final int value) {
         return positions.getOrDefault(value, new Position(value));
     }
 
     private Position(final int value) {
         validatePositionRange(value);
         this.value = value;
-
     }
 
     private static void validatePositionRange(final int value) {
