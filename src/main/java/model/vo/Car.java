@@ -6,19 +6,16 @@ public class Car {
     private static final int ONE_STEP = 1;
     private static final int START_POSITION = 0;
     private final Name name;
-    private Position position;
+    private final Position position;
 
-    public static Car from(final String name) {
-        return of(name, START_POSITION);
+    public Car(final Name name) {
+        this.name = name;
+        position = Position.valueOf(START_POSITION);
     }
 
-    public static Car of(final String name, final int position) {
-        return new Car(name, position);
-    }
-
-    private Car(final String name, final int position) {
-        this.name = new Name(name);
-        this.position = Position.from(position);
+    public Car(final Name name, final Position position) {
+        this.name = name;
+        this.position = position;
     }
 
     public Name getName() {
@@ -29,10 +26,11 @@ public class Car {
         return position;
     }
 
-    public void move(final boolean movable) {
+    public Car move(final boolean movable) {
         if (movable) {
-            this.position = position.increasePosition(ONE_STEP);
+            return new Car(this.name, position.increasePosition(ONE_STEP));
         }
+        return this;
     }
 
     @Override

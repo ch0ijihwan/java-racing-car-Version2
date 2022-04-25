@@ -12,33 +12,33 @@ class CarTest {
     private Car car;
 
     @Test
-    @DisplayName("from() 호출 시, 파라미터로 부터 입력 받은 name 값으로 이름을 가지며 자동차의 포지션을 0으로 가진 Car 객체를 생성한다.")
-    void from() {
+    @DisplayName("입력받은 Name 을 가지며 Position 을 0으로 가진 Car 객체를 생성한다.")
+    void createByName() {
         //given
-        String inputtedName = "apple";
-        int expectedPosition = 0;
+        Name name = new Name("apple");
 
         //when
-        Car actual = Car.from(inputtedName);
+        Car actual = new Car(name);
 
         //then
-        assertThat(actual).isEqualTo(Car.of(inputtedName, expectedPosition));
+        assertThat(actual).extracting("name", "position")
+                .contains(new Name("apple"), Position.valueOf(0));
     }
 
     @Test
-    @DisplayName("of() 호출 시, 파라미터로 부터 입력 받은 name 과 position 을 가진 Car 객체를 생성한다.")
-    void of() {
+    @DisplayName(" name 과 position 을 가진 Car 객체를 생성한다.")
+    void createByNameAndPosition() {
         //given
-        String inputtedName = "apple";
-        int inputtedPosition = 1;
+        Name name = new Name("apple");
+        Position position = Position.valueOf(1);
 
         //when
-        Car actual = Car.of(inputtedName, inputtedPosition);
+        Car actual = new Car(name, position);
 
         //then
         assertAll(
-                () -> assertThat(actual.getName()).isEqualTo(new Name(inputtedName)),
-                () -> assertThat(actual.getPosition()).isEqualTo(Position.from(inputtedPosition))
+                () -> assertThat(actual.getName()).isEqualTo(name),
+                () -> assertThat(actual.getPosition()).isEqualTo(position)
         );
     }
 
@@ -46,8 +46,8 @@ class CarTest {
     @DisplayName("getPosition() 호출 시, position 객체를 반환한다.")
     void getPosition() {
         //given
-        car = Car.from("apple");
-        Position expect = Position.from(0);
+        car = new Car(new Name("apple"));
+        Position expect = Position.valueOf(0);
 
         //when
         Position actual = car.getPosition();
@@ -60,28 +60,28 @@ class CarTest {
     @DisplayName("getName() 호출 시, Name 객체를 반환한다.")
     void getName() {
         //given
-        String inputtedCarName = "apple";
-        car = Car.from("apple");
+        Name name = new Name("apple");
+        car = new Car(name);
 
         //when
         Name actual = car.getName();
 
         //then
-        assertThat(actual).isEqualTo(new Name(inputtedCarName));
+        assertThat(actual).isEqualTo(name);
     }
 
     @ParameterizedTest
-    @DisplayName("move() 호출 시, 파라미터로 true 를 입력 받으면 Position 을 1 증가 시킨다.")
+    @DisplayName("move() 호출 시, 파라미터로 true 를 입력 받으면 Position 을 1 증가 시킨 자동차를 생성해 반환한다.")
     @CsvSource(value = {"true,1", "false,0"})
-    void move(final boolean movable, final int expectedPositionValue) {
+    void move(final boolean movable, final int position) {
         //given
-        car = Car.from("apple");
-        Position expectedPosition = Position.from(expectedPositionValue);
+        Name name = new Name("apple");
+        car = new Car(name, Position.valueOf(0));
 
         //when
-        car.move(movable);
+        Car actual = car.move(movable);
 
         //then
-        assertThat(car.getPosition()).isEqualTo(expectedPosition);
+        assertThat(actual).isEqualTo(new Car(name, Position.valueOf(position)));
     }
 }
