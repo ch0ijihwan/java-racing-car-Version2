@@ -18,6 +18,10 @@ public class Car {
         this.position = position;
     }
 
+    public Car(final String name, final int position){
+        this(new Name(name), Position.valueOf(position));
+    }
+
     public Name getName() {
         return name;
     }
