@@ -8,10 +8,9 @@ import java.util.stream.Collectors;
 public class Cars {
     private final List<Car> cars;
 
-    public Cars(final String[] names) {
-        validateDuplicationOfNames(names);
-        cars = Arrays.stream(names)
-                .map(Car::from)
+    public Cars(final Names names) {
+        cars = names.getNames().stream()
+                .map(Car::new)
                 .collect(Collectors.toUnmodifiableList());
     }
 
@@ -19,20 +18,11 @@ public class Cars {
         this.cars = new ArrayList<>(cars);
     }
 
-    private void validateDuplicationOfNames(final String[] names) {
-        if (hasDuplication(names)) {
-            throw new IllegalArgumentException("입력 받은 차 이름 중 중복이 있습니다.");
-        }
-    }
-
-    private boolean hasDuplication(final String[] names) {
-        return Arrays.stream(names)
-                .distinct()
-                .count() != names.length;
-    }
-
-    public void moveAllCar(final MovementStrategy movementStrategy) {
-        cars.forEach(car -> car.move(movementStrategy.generateMovable()));
+    public Cars moveAllCar(final MovementStrategy movementStrategy) {
+        List<Car> movedCars = cars.stream()
+                .map(car -> car.move(movementStrategy.generateMovable()))
+                .collect(Collectors.toUnmodifiableList());
+        return new Cars(movedCars);
     }
 
     public List<Car> getCars() {
