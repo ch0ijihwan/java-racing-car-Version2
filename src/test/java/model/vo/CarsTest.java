@@ -1,43 +1,47 @@
 package model.vo;
 
-import org.junit.jupiter.api.BeforeEach;
+import model.movement.MovementStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CarsTest {
     private Cars cars;
 
-    @BeforeEach
-    void setUp() {
-        cars = new Cars(List.of(
-                Car.of("hi", 3), Car.of("hello", 3),
-                Car.of("happy", 1)
-        ));
-    }
-
     @Test
-    @DisplayName("Cars 객체 생성 시, 입력받은 자동차 이름 중 중복이 있으면 예외를 반환한다.")
-    void createCars() {
+    @DisplayName("Names 객체를 받아 Position 이 0 인 자동차들을 생성한다.")
+    void createByNames() {
         //given
-        String[] inputtedCarNames = new String[]{"hello", "hello"};
+        Names names = new Names(List.of("apple", "hi", "hello"));
+
+        //when
+        cars = new Cars(names);
 
         //then
-        assertThatThrownBy(() -> new Cars(inputtedCarNames)).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("입력 받은 차 이름 중 중복이 있습니다.");
+        assertThat(cars).extracting("cars").isEqualTo(
+                List.of(new Car("apple", 0),
+                        new Car("hi", 0),
+                        new Car("hello", 0)
+                )
+        );
     }
 
     @Test
-    @DisplayName("getCars() 호출 시, cars 를 반환한다.")
+    @DisplayName("cars 를 반환한다.")
     void getCars() {
         //given
+        cars = new Cars(List.of(
+                new Car("hello", 1),
+                new Car("apple", 2)
+        ));
+
         List<Car> expect = List.of(
-                Car.of("hi", 3), Car.of("hello", 3),
-                Car.of("happy", 1));
+                new Car("hello", 1),
+                new Car("apple", 2)
+        );
 
         //when
         List<Car> actual = cars.getCars();
@@ -47,10 +51,50 @@ class CarsTest {
     }
 
     @Test
+    @DisplayName("자동차들을 주어진 움직임 전략에 따라 움직인 후, 자동차들을 반환한다.")
+    void moveAllCar() {
+        //given
+        cars = new Cars(List.of(
+                new Car("hello", 1),
+                new Car("apple", 2)
+        ));
+        MovementStrategy testMovement = new alwaysMove();
+
+        //when
+        Cars actual = this.cars.moveAllCar(testMovement);
+
+        //then
+        assertThat(actual).isEqualTo(
+                new Cars(List.of(
+                        new Car("hello", 2),
+                        new Car("apple", 3)
+                ))
+        );
+    }
+
+    static class alwaysMove implements MovementStrategy {
+        @Override
+        public boolean generateMovable() {
+            return true;
+        }
+    }
+
+    @Test
     @DisplayName("getWinners() 호출 시, 자동차들 중 우승자의 이름을 뽑아 리스트 형태로 반환한다. 이때 우승자가 둘 이상일 경우 모두 다 반환한다.")
     void getWinners() {
         //given
-        List<Car> expect = List.of(Car.of("hello", 3), Car.of("hi", 3));
+        cars = new Cars(
+                List.of(
+                        new Car("hello", 1),
+                        new Car("apple", 2),
+                        new Car("hi", 2)
+                )
+        );
+
+        List<Car> expect = List.of(
+                new Car(new Name("apple"), Position.valueOf(2)),
+                new Car(new Name("hi"), Position.valueOf(2))
+        );
 
         //when
         List<Car> actual = cars.getWinners();
