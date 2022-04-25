@@ -17,7 +17,7 @@ public class Position implements Comparable<Position> {
                 .collect(Collectors.toUnmodifiableMap(key -> key, Position::new));
     }
 
-    public static Position from(final int value) {
+    public static Position valueOf(final int value) {
         return positions.getOrDefault(value, new Position(value));
     }
 
@@ -37,7 +37,7 @@ public class Position implements Comparable<Position> {
     }
 
     public Position increasePosition(final int incrementalValue) {
-        return Position.from(value + incrementalValue);
+        return Position.valueOf(value + incrementalValue);
     }
 
     @Override
