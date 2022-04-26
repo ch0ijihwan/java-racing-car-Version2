@@ -3,6 +3,7 @@ package model;
 import model.movement.MovementStrategy;
 import model.vo.Cars;
 import model.vo.Names;
+import model.vo.NumberOfAttempt;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -4,6 +4,7 @@ import model.movement.MovementStrategy;
 import model.vo.Car;
 import model.vo.Cars;
 import model.vo.Names;
+import model.vo.NumberOfAttempt;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
