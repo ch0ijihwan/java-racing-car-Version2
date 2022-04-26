@@ -4,6 +4,7 @@ import controller.dto.CarsDto;
 import controller.dto.WinnersDto;
 import model.RacingGame;
 import model.movement.MovementStrategy;
+import model.movement.RandomMovable;
 import model.vo.Names;
 import view.display.Display;
 import view.input.Input;
@@ -11,12 +12,10 @@ import view.input.Input;
 import java.util.Arrays;
 
 public class Controller {
-    private final MovementStrategy movementStrategy;
     private final Input input;
     private final Display display;
 
-    public Controller(final Input input, final Display display, final MovementStrategy movementStrategy) {
-        this.movementStrategy = movementStrategy;
+    public Controller(final Input input, final Display display) {
         this.input = input;
         this.display = display;
     }
@@ -34,6 +33,7 @@ public class Controller {
     }
 
     private RacingGame playRacingGame(final RacingGame racingGame) {
+        MovementStrategy movementStrategy = new RandomMovable();
         while (!racingGame.isGameEnd()) {
             racingGame.playOneRound(movementStrategy);
             CarsDto carsDto = new CarsDto(racingGame.getCarNamesDuringRacing(), racingGame.getCarPositionsDuringRacing());
