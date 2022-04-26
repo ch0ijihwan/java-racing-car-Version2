@@ -3,7 +3,7 @@ package model;
 import model.movement.MovementStrategy;
 import model.vo.Car;
 import model.vo.Cars;
-import org.junit.jupiter.api.BeforeEach;
+import model.vo.Names;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,26 +14,11 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class RacingGameTest {
     private RacingGame racingGame;
-    private Cars cars;
-    private String[] names;
     private final MovementStrategy testMovementStrategy = new alwaysMove();
-
-    @BeforeEach
-    void setUp() {
-        names = new String[]{"apple", "hi", "hello"};
-        cars = new Cars(
-                List.of(
-                        Car.of("hello", 1),
-                        Car.of("hi", 2),
-                        Car.of("apple", 2)
-                )
-        );
-    }
 
     static class alwaysMove implements MovementStrategy {
         @Override
@@ -43,54 +28,60 @@ class RacingGameTest {
     }
 
     @Test
-    @DisplayName("객체 생성 시, 파라미터로 부터 입력받은 자동차 이름들과 시도 횟수를 기반으로 , Cars 객체와 NumberOfAttempt 객체를 만든다.")
+    @DisplayName("입력받은 자동차 이름들과 시도 횟수를 기반으로 , RacingGame 객체를 만든다.")
     void create() {
         //given
-        int inputtedNumberOfAttempt = 5;
+        Names names = new Names(List.of("apple", "hello", "hi"));
+        int numberOfAttempt = 5;
+        Cars expect = new Cars(List.of(
+                new Car("apple", 0),
+                new Car("hello", 0),
+                new Car("hi", 0))
+        );
 
         //when
-        racingGame = new RacingGame(names, inputtedNumberOfAttempt);
+        racingGame = new RacingGame(names, numberOfAttempt);
 
         //then
-        assertThat(racingGame).isEqualTo(new RacingGame(names, inputtedNumberOfAttempt));
+        assertThat(racingGame).extracting("racingCars")
+                .isEqualTo(expect);
     }
 
     @Test
-    @DisplayName("생체 생성 시, String [] 타입을 받는 경우 입력 받은 이름들이 null 이면 예외처리를 반환한다.")
+    @DisplayName("생체 생성 시, 입력받은 값이 null 이면 예외처리를 반환한다.")
     void validateNull() {
         //given
-        String[] inputtedNames = null;
-        int inputtedNumberOfAttempt = 2;
+        int numberOfAttempt = 2;
 
         //when
-        assertThatThrownBy(() -> new RacingGame(inputtedNames, inputtedNumberOfAttempt)).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("null 값이 입력되었습니다.");
+        assertThatIllegalArgumentException().isThrownBy(() -> new RacingGame(null, numberOfAttempt))
+                .withMessage("null 값이 입력되었습니다.");
     }
 
     @Test
-    @DisplayName("playOneRound() 호출 시, 파라미터로 부터 입력 받은 움직임 전략에 따라서 자동차를 이동 시킨다." +
-            " 그리고 numberOfAttempt 를 1 감소 시킨다.")
+    @DisplayName("입력 받은 움직임 전략에 따라서 자동차를 이동 시킨다. 그리고 numberOfAttempt 를 하나 줄인다.")
     void playOneRound() {
         //given
-        int inputtedNumberOfAttempt = 2;
-        Cars expectedCars = new Cars(
-                List.of(Car.of("apple", 1),
-                        Car.of("hi", 1),
-                        Car.of("hello", 1))
+        Cars cars = new Cars(List.of(
+                new Car("apple", 0),
+                new Car("hello", 0),
+                new Car("hi", 0))
         );
-        NumberOfAttempt expectedNumberOfAttempt = new NumberOfAttempt(1);
-        racingGame = new RacingGame(names, inputtedNumberOfAttempt);
+        NumberOfAttempt numberOfAttempt = new NumberOfAttempt(1);
+        Cars expectCars = new Cars(List.of(
+                new Car("apple", 1),
+                new Car("hello", 1),
+                new Car("hi", 1))
+        );
+        NumberOfAttempt expectNumberOfAttempt = new NumberOfAttempt(0);
+        racingGame = new RacingGame(cars, numberOfAttempt);
 
         //when
         racingGame.playOneRound(testMovementStrategy);
 
         //then
-        assertAll(
-                () -> assertThat(racingGame).extracting("racingCars")
-                        .isEqualTo(expectedCars),
-                () -> assertThat(racingGame).extracting("numberOfAttempt")
-                        .isEqualTo(expectedNumberOfAttempt)
-        );
+        assertThat(racingGame).extracting("racingCars", "numberOfAttempt")
+                .containsExactly(expectCars, expectNumberOfAttempt);
     }
 
     @ParameterizedTest
@@ -98,6 +89,7 @@ class RacingGameTest {
     @MethodSource("createNumberOfAttemptParameterProvider")
     void isGameEnd(final int inputtedNumberOfAttempt, final boolean expect) {
         //given
+        Names names = new Names(List.of("apple", "hello", "hi"));
         racingGame = new RacingGame(names, inputtedNumberOfAttempt);
         racingGame.playOneRound(testMovementStrategy);
 
@@ -116,39 +108,57 @@ class RacingGameTest {
     }
 
     @Test
-    @DisplayName("getCarsDuringRacing() 호출 시, 게임 내 자동차들의 리스트를 반환한다.")
-    void getCars() {
+    @DisplayName("getCarNamesDuringRacing() 호출 시, 게임 내 자동차들의 이름 리스트를 반환한다.")
+    void getCarNamesDuringRacing() {
         //given
-        List<Car> expect = List.of(
-                Car.of("hello", 1),
-                Car.of("hi", 2),
-                Car.of("apple", 2)
-        );
-        int inputtedNumberOfAttempts = 2;
-        racingGame = new RacingGame(cars, inputtedNumberOfAttempts);
+        int numberOfAttempt = 2;
+        Names names = new Names(List.of("apple", "hello", "hi"));
+        racingGame = new RacingGame(names, numberOfAttempt);
+        List<String> expect = List.of("apple", "hello", "hi");
 
         //when
-        List<Car> actual = racingGame.getCarsDuringRacing();
+        List<String> actual = racingGame.getCarNamesDuringRacing();
 
         //then
         assertThat(actual).isEqualTo(expect);
     }
 
     @Test
-    @DisplayName("getWinners() 호출 시, 우승자로 구성된 Car 리스트를 반환한다.")
-    void getWinners() {
+    @DisplayName("게임 내 자동차들의 포지션 리스트를 반환한다.")
+    void getCarPositions() {
         //given
-        int inputtedNumberOfAttempt = 1;
-        List<Car> expect = List.of(
-                Car.of("hi", 2),
-                Car.of("apple", 2)
+        Cars cars = new Cars(List.of(
+                new Car("apple", 1),
+                new Car("apple", 2),
+                new Car("hi", 3))
         );
-        racingGame = new RacingGame(cars, inputtedNumberOfAttempt);
+        NumberOfAttempt numberOfAttempt = new NumberOfAttempt(2);
+        racingGame = new RacingGame(cars, numberOfAttempt);
+        List<Integer> expect = List.of(1, 2, 3);
 
         //when
-        List<Car> actualWinners = racingGame.getWinners();
+        List<Integer> actual = racingGame.getCarPositionsDuringRacing();
 
         //then
-        assertThat(actualWinners).containsAll(expect);
+        assertThat(actual).isEqualTo(expect);
+    }
+
+    @Test
+    @DisplayName("우승자 이름으로 구성된 리스트를 반환한다.")
+    void getWinnerNames() {
+        //given
+        Cars cars = new Cars(
+                List.of(new Car("hi", 2),
+                        new Car("apple", 2),
+                        new Car("hello", 1))
+        );
+        racingGame = new RacingGame(cars, new NumberOfAttempt(1));
+        List<String> expect = List.of("hi", "apple");
+
+        //when
+        List<String> actual = racingGame.getWinnerNames();
+
+        //then
+        assertThat(actual).isEqualTo(expect);
     }
 }
