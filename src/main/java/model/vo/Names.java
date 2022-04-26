@@ -1,6 +1,7 @@
 package model.vo;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Names {
@@ -27,6 +28,19 @@ public class Names {
         if (names == null) {
             throw new IllegalArgumentException("null 값이 입력되었습니다.");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Names names1 = (Names) o;
+        return Objects.equals(names, names1.names);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(names);
     }
 
     public List<Name> getNames() {
