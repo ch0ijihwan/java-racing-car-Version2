@@ -10,6 +10,14 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 class NamesTest {
     @Test
+    @DisplayName("null에 대한 예외처리를 한다.")
+    void validateNull() {
+        //then
+        assertThatIllegalArgumentException().isThrownBy(() -> new Names(null))
+                .withMessage("null 값이 입력되었습니다.");
+    }
+
+    @Test
     @DisplayName("입력받은 이름들 중 중복이 있으면 예외를 반환한다.")
     void createCars() {
         //given
