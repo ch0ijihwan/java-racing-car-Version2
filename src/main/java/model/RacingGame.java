@@ -1,26 +1,26 @@
 package model;
 
 import model.movement.MovementStrategy;
-import model.vo.Car;
 import model.vo.Cars;
+import model.vo.Names;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class RacingGame {
-    private final Cars racingCars;
+    private Cars racingCars;
     private NumberOfAttempt numberOfAttempt;
 
-    public RacingGame(final String[] inputtedNames, final int inputtedNumberOfAttempt) {
-        validateNull(inputtedNames);
-        this.racingCars = new Cars(inputtedNames);
+    public RacingGame(final Names names, final int inputtedNumberOfAttempt) {
+        validateNull(names);
+        this.racingCars = new Cars(names);
         this.numberOfAttempt = new NumberOfAttempt(inputtedNumberOfAttempt);
     }
 
-    public RacingGame(final Cars inputtedCars, final int numberOfAttempt) {
-        validateNull(inputtedCars);
-        this.racingCars = inputtedCars;
-        this.numberOfAttempt = new NumberOfAttempt(numberOfAttempt);
+    public RacingGame(final Cars cars, final NumberOfAttempt numberOfAttempt) {
+        validateNull(cars);
+        this.racingCars = cars;
+        this.numberOfAttempt = numberOfAttempt;
     }
 
     private void validateNull(final Object inputtedNames) {
@@ -29,12 +29,8 @@ public class RacingGame {
         }
     }
 
-    public List<Car> getWinners() {
-        return racingCars.getWinners();
-    }
-
     public void playOneRound(final MovementStrategy movementStrategy) {
-        racingCars.moveAllCar(movementStrategy);
+        racingCars = racingCars.moveAllCar(movementStrategy);
         numberOfAttempt = numberOfAttempt.decrease();
     }
 
@@ -42,20 +38,24 @@ public class RacingGame {
         return numberOfAttempt.isEnd();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RacingGame that = (RacingGame) o;
-        return Objects.equals(racingCars, that.racingCars) && Objects.equals(numberOfAttempt, that.numberOfAttempt);
+    public List<String> getCarNamesDuringRacing() {
+        return racingCars.getCars()
+                .stream()
+                .map(car -> car.getName().getValue())
+                .collect(Collectors.toUnmodifiableList());
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(racingCars, numberOfAttempt);
+    public List<Integer> getCarPositionsDuringRacing() {
+        return racingCars.getCars()
+                .stream()
+                .map(car -> car.getPosition().getValue())
+                .collect(Collectors.toUnmodifiableList());
     }
 
-    public List<Car> getCarsDuringRacing() {
-        return racingCars.getCars();
+    public List<String> getWinnerNames() {
+        return racingCars.getWinners()
+                .stream()
+                .map(car -> car.getName().getValue())
+                .collect(Collectors.toUnmodifiableList());
     }
 }
