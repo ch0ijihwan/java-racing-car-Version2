@@ -14,5 +14,6 @@ public class App {
         Display display = new ConsoleDisplay();
         MovementStrategy movementStrategy = new RandomMovable();
         Controller controller = new Controller(input, display, movementStrategy);
+        controller.run();
     }
 }
