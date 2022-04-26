@@ -4,8 +4,11 @@ import controller.dto.CarsDto;
 import controller.dto.WinnersDto;
 import model.RacingGame;
 import model.movement.MovementStrategy;
+import model.vo.Names;
 import view.display.Display;
 import view.input.Input;
+
+import java.util.Arrays;
 
 public class Controller {
     private final MovementStrategy movementStrategy;
@@ -16,17 +19,31 @@ public class Controller {
         this.movementStrategy = movementStrategy;
         this.input = input;
         this.display = display;
-        run();
     }
 
-    private void run() {
-        RacingGame racingGame = new RacingGame(input.inputCarNames(), input.inputNumberOfAttempt());
+    public void run() {
+        RacingGame racingGame = setRacingGame();
+        RacingGame endRacingGame = playRacingGame(racingGame);
+        showRacingResult(endRacingGame);
+    }
+
+    private RacingGame setRacingGame() {
+        Names names = new Names(Arrays.asList(input.inputCarNames()));
+        int numberOfAttempt = input.inputNumberOfAttempt();
+        return new RacingGame(names, numberOfAttempt);
+    }
+
+    private RacingGame playRacingGame(final RacingGame racingGame) {
         while (!racingGame.isGameEnd()) {
             racingGame.playOneRound(movementStrategy);
-            CarsDto carsDto = new CarsDto(racingGame.getCarsDuringRacing());
+            CarsDto carsDto = new CarsDto(racingGame.getCarNamesDuringRacing(), racingGame.getCarPositionsDuringRacing());
             display.printCarsStatus(carsDto);
         }
-        WinnersDto winnersDto = new WinnersDto(racingGame.getWinners());
+        return racingGame;
+    }
+
+    private void showRacingResult(final RacingGame racingGame) {
+        WinnersDto winnersDto = new WinnersDto(racingGame.getWinnerNames());
         display.printWinners(winnersDto);
     }
 }
