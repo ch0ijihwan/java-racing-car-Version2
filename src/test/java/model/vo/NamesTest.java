@@ -5,15 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 class NamesTest {
     @Test
-    @DisplayName("null에 대한 예외처리를 한다.")
+    @DisplayName("null 에 대한 예외처리를 한다.")
     void validateNull() {
         //then
-        assertThatIllegalArgumentException().isThrownBy(() -> new Names(null))
+        assertThatNullPointerException().isThrownBy(() -> new Names(null))
                 .withMessage("null 값이 입력되었습니다.");
     }
 
