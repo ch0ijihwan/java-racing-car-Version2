@@ -21,12 +21,12 @@ class CarTest {
         Car actual = new Car(name);
 
         //then
-        assertThat(actual).extracting("name", "position")
-                .contains(new Name("apple"), Position.valueOf(0));
+        assertThat(actual).hasFieldOrPropertyWithValue("name", new Name("apple"))
+                .hasFieldOrPropertyWithValue("position", Position.valueOf(0));
     }
 
     @Test
-    @DisplayName(" name 과 position 을 가진 Car 객체를 생성한다.")
+    @DisplayName("name 과 position 을 가진 Car 객체를 생성한다.")
     void createByNameAndPosition() {
         //given
         Name name = new Name("apple");
