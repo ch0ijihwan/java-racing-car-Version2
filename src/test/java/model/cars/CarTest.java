@@ -85,6 +85,6 @@ class CarTest {
         Car actual = car.move(movable);
 
         //then
-        assertThat(actual).isEqualTo(new Car(name, Position.valueOf(position)));
+        assertThat(actual).hasFieldOrPropertyWithValue("position", Position.valueOf(position));
     }
 }
