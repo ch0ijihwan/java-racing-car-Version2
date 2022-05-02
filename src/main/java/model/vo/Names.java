@@ -24,6 +24,10 @@ public class Names {
         }
     }
 
+    public List<Name> getNames() {
+        return names;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,9 +39,5 @@ public class Names {
     @Override
     public int hashCode() {
         return Objects.hash(names);
-    }
-
-    public List<Name> getNames() {
-        return names;
     }
 }
