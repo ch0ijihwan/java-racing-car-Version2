@@ -3,6 +3,7 @@ package model.vo;
 import java.util.Objects;
 
 public class NumberOfAttempt {
+
     private static final int END_POINT = 0;
     private static final int MIN_NUMBER_OF_ATTEMPT = 0;
     private static final int SCALE_OF_DECREASE = 1;
