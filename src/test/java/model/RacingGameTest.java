@@ -18,6 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class RacingGameTest {
+
     private RacingGame racingGame;
     private final MovementStrategy testMovementStrategy = new alwaysMove();
 

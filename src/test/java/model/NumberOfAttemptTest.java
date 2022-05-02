@@ -13,6 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class NumberOfAttemptTest {
+
     @Test
     @DisplayName("객체 생성 시, 시도 횟수가 음수일 경우 예외처리를 반환한다.")
     void validateForPositiveValue() {

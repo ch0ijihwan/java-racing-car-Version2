@@ -8,6 +8,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 class NamesTest {
+
     @Test
     @DisplayName("null 에 대한 예외처리를 한다.")
     void validateNull() {
