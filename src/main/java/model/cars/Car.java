@@ -1,25 +1,30 @@
-package model.vo;
+package model.cars;
+
+import model.vo.Name;
+import model.vo.Position;
 
 import java.util.Objects;
 
 public class Car {
+
     private static final int ONE_STEP = 1;
-    private static final int START_POSITION = 0;
+
     private final Name name;
     private final Position position;
 
     public Car(final Name name) {
         this.name = name;
-        position = Position.valueOf(START_POSITION);
+        position = Position.valueOfDefault();
     }
 
-    public Car(final Name name, final Position position) {
+    Car(final Name name, final Position position) {
         this.name = name;
         this.position = position;
     }
 
-    public Car(final String name, final int position){
-        this(new Name(name), Position.valueOf(position));
+    public Car(final String name, final int position) {
+        this.name = new Name(name);
+        this.position = Position.valueOf(position);
     }
 
     public Name getName() {
@@ -42,12 +47,12 @@ public class Car {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return Objects.equals(name, car.name) && Objects.equals(position, car.position);
+        return Objects.equals(name, car.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, position);
+        return Objects.hash(name);
     }
 
     @Override
