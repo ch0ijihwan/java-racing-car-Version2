@@ -1,6 +1,9 @@
-package model.vo;
+package model.cars;
 
 import model.movement.MovementStrategy;
+import model.vo.Name;
+import model.vo.Names;
+import model.vo.Position;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +15,7 @@ class CarsTest {
     private Cars cars;
 
     @Test
-    @DisplayName("Names 객체를 받아 Position 이 0 인 자동차들을 생성한다.")
+    @DisplayName("Names 객체를 받아 자동차들을 생성한다.")
     void createByNames() {
         //given
         Names names = new Names(List.of("apple", "hi", "hello"));
@@ -59,17 +62,16 @@ class CarsTest {
                 new Car("apple", 2)
         ));
         MovementStrategy testMovement = new alwaysMove();
+        List<Car> expect = List.of(
+                new Car("hello", 2),
+                new Car("apple", 3)
+        );
 
         //when
         Cars actual = this.cars.moveAllCar(testMovement);
 
         //then
-        assertThat(actual).isEqualTo(
-                new Cars(List.of(
-                        new Car("hello", 2),
-                        new Car("apple", 3)
-                ))
-        );
+        assertThat(actual).hasFieldOrPropertyWithValue("cars", expect);
     }
 
     static class alwaysMove implements MovementStrategy {
