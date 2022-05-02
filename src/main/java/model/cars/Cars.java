@@ -1,15 +1,22 @@
-package model.vo;
+package model.cars;
 
 import model.movement.MovementStrategy;
+import model.vo.Names;
+import model.vo.Position;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Cars {
+
     private final List<Car> cars;
 
     public Cars(final Names names) {
-        cars = names.getNames().stream()
+        cars = names.getNames()
+                .stream()
                 .map(Car::new)
                 .collect(Collectors.toUnmodifiableList());
     }
@@ -47,19 +54,6 @@ public class Cars {
         return cars.stream()
                 .filter(car -> car.getPosition().equals(topRecordPosition))
                 .collect(Collectors.toUnmodifiableList());
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Cars cars1 = (Cars) o;
-        return Objects.equals(cars, cars1.cars);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(cars);
     }
 
     @Override
