@@ -1,7 +1,7 @@
 package model;
 
+import model.cars.Cars;
 import model.movement.MovementStrategy;
-import model.vo.Cars;
 import model.vo.Names;
 import model.vo.NumberOfAttempt;
 
