@@ -6,9 +6,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Position implements Comparable<Position> {
+
     private static final int MAXIMUM_VALUE_OF_FREQUENTLY_USED_POSITION = 50;
     private static final int MINIMUM_POSITION_VALUE = 0;
-    private static final Map<Integer, Position> positions = createPositions();
+    private static final int DEFAULT_POSITION_VALUE = 0;
+    private static final Map<Integer, Position> CACHE_POSITIONS = createPositions();
+
     private final int value;
 
     private static Map<Integer, Position> createPositions() {
@@ -18,7 +21,11 @@ public class Position implements Comparable<Position> {
     }
 
     public static Position valueOf(final int value) {
-        return positions.getOrDefault(value, new Position(value));
+        return CACHE_POSITIONS.getOrDefault(value, new Position(value));
+    }
+
+    public static Position valueOfDefault() {
+        return CACHE_POSITIONS.get(DEFAULT_POSITION_VALUE);
     }
 
     private Position(final int value) {
