@@ -7,11 +7,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class PositionTest {
+
     @Test
     @DisplayName("포지션 값을 반환한다.")
     void getValue() {
         //given
-        final int value = 1;
+        int value = 1;
         Position position = Position.valueOf(value);
 
         //when
@@ -19,6 +20,17 @@ class PositionTest {
 
         //then
         assertThat(actual).isEqualTo(value);
+    }
+
+    @Test
+    @DisplayName("디폴트 포지션 값을 반환한다.")
+    void valueOfDefault() {
+        //given
+        Position expect = Position.valueOf(0);
+        //when
+        Position actual = Position.valueOfDefault();
+        //then
+        assertThat(actual).isEqualTo(expect);
     }
 
     @Test
