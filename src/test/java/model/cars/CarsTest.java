@@ -19,17 +19,17 @@ class CarsTest {
     void createByNames() {
         //given
         Names names = new Names(List.of("apple", "hi", "hello"));
+        List<Car> expect = List.of(
+                new Car("apple", 0),
+                new Car("hi", 0),
+                new Car("hello", 0));
 
         //when
         cars = new Cars(names);
 
         //then
-        assertThat(cars).extracting("cars").isEqualTo(
-                List.of(new Car("apple", 0),
-                        new Car("hi", 0),
-                        new Car("hello", 0)
-                )
-        );
+        assertThat(cars).extracting("cars")
+                .isEqualTo(expect);
     }
 
     @Test
