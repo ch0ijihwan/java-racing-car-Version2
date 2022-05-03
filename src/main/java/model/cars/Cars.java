@@ -22,7 +22,25 @@ public class Cars {
     }
 
     public Cars(final List<Car> cars) {
+        validateCars(cars);
         this.cars = new ArrayList<>(cars);
+    }
+
+    private void validateCars(final List<Car> cars) {
+        validateNullOrEmpty(cars);
+        validateDuplication(cars);
+    }
+
+    private void validateNullOrEmpty(final List<Car> cars) {
+        if (cars == null || cars.isEmpty()) {
+            throw new IllegalArgumentException("자동차가 없습니다.");
+        }
+    }
+
+    private void validateDuplication(final List<Car> cars) {
+        if (cars.stream().distinct().count() != cars.size()) {
+            throw new IllegalArgumentException("자동차들 중 중복이 있습니다.");
+        }
     }
 
     public Cars moveAllCar(final MovementStrategy movementStrategy) {
