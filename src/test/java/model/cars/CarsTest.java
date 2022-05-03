@@ -55,6 +55,7 @@ class CarsTest {
         //then
         assertThat(actual).isEqualTo(expect);
     }
+
     @ParameterizedTest
     @NullAndEmptySource
     @DisplayName("입력 받은 자동차들이 존재하지 않으면 예외처리 반환")
