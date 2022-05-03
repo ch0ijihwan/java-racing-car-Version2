@@ -6,10 +6,13 @@ import model.vo.Names;
 import model.vo.Position;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class CarsTest {
     private Cars cars;
@@ -51,6 +54,25 @@ class CarsTest {
 
         //then
         assertThat(actual).isEqualTo(expect);
+    }
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("입력 받은 자동차들이 존재하지 않으면 예외처리 반환")
+    void validateNullOfEmpty(final List<Car> input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Cars(input))
+                .withMessage("자동차가 없습니다.");
+    }
+
+    @Test
+    @DisplayName("자동차들이 중복 될 경우 예외처리 반환")
+    void validateDuplication() {
+        //given
+        List<Car> input = List.of(new Car(new Name("apple"), Position.valueOfDefault()),
+                new Car(new Name("apple"), Position.valueOfDefault()));
+
+        //then
+        assertThatIllegalArgumentException().isThrownBy(() -> new Cars(input))
+                .withMessage("자동차들 중 중복이 있습니다.");
     }
 
     @Test
