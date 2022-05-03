@@ -24,11 +24,11 @@ class PositionTest {
 
     @Test
     @DisplayName("디폴트 포지션 값을 반환한다.")
-    void valueOfDefault() {
+    void valueOfDefaultWithZero() {
         //given
         Position expect = Position.valueOf(0);
         //when
-        Position actual = Position.valueOfDefault();
+        Position actual = Position.valueOfDefaultWithZero();
         //then
         assertThat(actual).isEqualTo(expect);
     }

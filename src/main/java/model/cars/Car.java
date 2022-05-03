@@ -14,7 +14,7 @@ public class Car {
 
     public Car(final Name name) {
         this.name = name;
-        position = Position.valueOfDefault();
+        position = Position.valueOfDefaultWithZero();
     }
 
     Car(final Name name, final Position position) {

@@ -68,8 +68,8 @@ class CarsTest {
     @DisplayName("자동차들이 중복 될 경우 예외처리 반환")
     void validateDuplication() {
         //given
-        List<Car> input = List.of(new Car(new Name("apple"), Position.valueOfDefault()),
-                new Car(new Name("apple"), Position.valueOfDefault()));
+        List<Car> input = List.of(new Car(new Name("apple"), Position.valueOfDefaultWithZero()),
+                new Car(new Name("apple"), Position.valueOfDefaultWithZero()));
 
         //then
         assertThatIllegalArgumentException().isThrownBy(() -> new Cars(input))
