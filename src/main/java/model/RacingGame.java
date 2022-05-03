@@ -12,16 +12,17 @@ public class RacingGame {
     private Cars racingCars;
     private NumberOfAttempt numberOfAttempt;
 
-    public RacingGame(final Names names, final int inputtedNumberOfAttempt) {
+    public RacingGame(final Names names, final NumberOfAttempt inputtedNumberOfAttempt) {
         validateNull(names);
         this.racingCars = new Cars(names);
-        this.numberOfAttempt = new NumberOfAttempt(inputtedNumberOfAttempt);
+        this.numberOfAttempt = inputtedNumberOfAttempt;
     }
 
     public RacingGame(final Cars cars, final NumberOfAttempt numberOfAttempt) {
         validateNull(cars);
         this.racingCars = cars;
         this.numberOfAttempt = numberOfAttempt;
+
     }
 
     private void validateNull(final Object inputtedNames) {

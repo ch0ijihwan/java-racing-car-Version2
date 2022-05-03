@@ -6,6 +6,7 @@ import model.RacingGame;
 import model.movement.MovementStrategy;
 import model.movement.RandomMovable;
 import model.vo.Names;
+import model.vo.NumberOfAttempt;
 import view.display.Display;
 import view.input.Input;
 
@@ -28,7 +29,7 @@ public class Controller {
 
     private RacingGame setRacingGame() {
         Names names = new Names(Arrays.asList(input.inputCarNames()));
-        int numberOfAttempt = input.inputNumberOfAttempt();
+        NumberOfAttempt numberOfAttempt = new NumberOfAttempt(input.inputNumberOfAttempt());
         return new RacingGame(names, numberOfAttempt);
     }
 

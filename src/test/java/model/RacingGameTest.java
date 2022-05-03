@@ -33,10 +33,10 @@ class RacingGameTest {
     @DisplayName("생체 생성 시, 입력받은 값이 null 이면 예외처리를 반환한다.")
     void validateNull() {
         //given
-        int numberOfAttempt = 2;
+        NumberOfAttempt numberOfAttempt = new NumberOfAttempt(2);
 
         //when
-        assertThatIllegalArgumentException().isThrownBy(() -> new RacingGame(null, numberOfAttempt))
+        assertThatIllegalArgumentException().isThrownBy(() -> new RacingGame((Names) null, numberOfAttempt))
                 .withMessage("null 값이 입력되었습니다.");
     }
 
@@ -60,7 +60,7 @@ class RacingGameTest {
     @ParameterizedTest
     @DisplayName("isGameEnd() 호출 시, 게임이 끝났으면 true 를 반환 그렇지 않으면 false 를 반환한다.")
     @MethodSource("createNumberOfAttemptParameterProvider")
-    void isGameEnd(final int inputtedNumberOfAttempt, final boolean expect) {
+    void isGameEnd(final NumberOfAttempt inputtedNumberOfAttempt, final boolean expect) {
         //given
         Names names = new Names(List.of("apple", "hello", "hi"));
         racingGame = new RacingGame(names, inputtedNumberOfAttempt);
@@ -75,8 +75,8 @@ class RacingGameTest {
 
     static Stream<Arguments> createNumberOfAttemptParameterProvider() {
         return Stream.of(
-                Arguments.of(1, true),
-                Arguments.of(2, false)
+                Arguments.of(new NumberOfAttempt(1), true),
+                Arguments.of(new NumberOfAttempt(2 ), false)
         );
     }
 
@@ -84,7 +84,7 @@ class RacingGameTest {
     @DisplayName("getCarNamesDuringRacing() 호출 시, 게임 내 자동차들의 이름 리스트를 반환한다.")
     void getCarNamesDuringRacing() {
         //given
-        int numberOfAttempt = 2;
+        NumberOfAttempt numberOfAttempt = new NumberOfAttempt(2);
         Names names = new Names(List.of("apple", "hello", "hi"));
         racingGame = new RacingGame(names, numberOfAttempt);
         List<String> expect = List.of("apple", "hello", "hi");
@@ -119,7 +119,6 @@ class RacingGameTest {
     @DisplayName("우승자 이름으로 구성된 리스트를 반환한다.")
     void getWinnerNames() {
         //given
-
         Cars cars = new Cars(
                 List.of(new Car("hi", 2),
                         new Car("apple", 2),
