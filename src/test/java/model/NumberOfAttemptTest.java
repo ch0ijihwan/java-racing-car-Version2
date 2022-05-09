@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class NumberOfAttemptTest {
 
@@ -20,8 +20,9 @@ class NumberOfAttemptTest {
         //given
         int inputtedValue = -1;
         //then
-        assertThatThrownBy(() -> new NumberOfAttempt(inputtedValue)).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("시도 횟수는 음수가 아니어야 합니다.");
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new NumberOfAttempt(inputtedValue))
+                .withMessage("시도 횟수는 음수가 아니어야 합니다.");
     }
 
     @Test
