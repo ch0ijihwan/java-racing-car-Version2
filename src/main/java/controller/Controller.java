@@ -15,15 +15,17 @@ import java.util.Arrays;
 public class Controller {
     private final Input input;
     private final Display display;
+    private final MovementStrategy movementStrategy;
 
     public Controller(final Input input, final Display display) {
         this.input = input;
         this.display = display;
+        this.movementStrategy = new RandomMovable();
     }
 
     public void run() {
         RacingGame racingGame = setRacingGame();
-        RacingGame endRacingGame = playRacingGame(racingGame);
+        RacingGame endRacingGame = playRacingGame(racingGame, movementStrategy);
         showRacingResult(endRacingGame);
     }
 
@@ -33,8 +35,7 @@ public class Controller {
         return new RacingGame(names, numberOfAttempt);
     }
 
-    private RacingGame playRacingGame(final RacingGame racingGame) {
-        MovementStrategy movementStrategy = new RandomMovable();
+    private RacingGame playRacingGame(final RacingGame racingGame, final MovementStrategy movementStrategy) {
         while (!racingGame.isGameEnd()) {
             racingGame.playOneRound(movementStrategy);
             CarsDto carsDto = new CarsDto(racingGame.getCarNamesDuringRacing(), racingGame.getCarPositionsDuringRacing());
