@@ -10,7 +10,7 @@ public class Position implements Comparable<Position> {
     private static final int MAXIMUM_VALUE_OF_FREQUENTLY_USED_POSITION = 50;
     private static final int MINIMUM_POSITION_VALUE = 0;
     private static final int DEFAULT_POSITION_VALUE = 0;
-    private static final Map<Integer, Position> CACHE_POSITIONS = createCacheForPositions();
+    private static final Map<Integer, Position> CACHED_POSITIONS = createCacheForPositions();
 
     private final int value;
 
@@ -21,11 +21,11 @@ public class Position implements Comparable<Position> {
     }
 
     public static Position valueOfDefaultWithZero() {
-        return CACHE_POSITIONS.get(DEFAULT_POSITION_VALUE);
+        return CACHED_POSITIONS.get(DEFAULT_POSITION_VALUE);
     }
 
     public static Position valueOf(final int value) {
-        return CACHE_POSITIONS.getOrDefault(value, new Position(value));
+        return CACHED_POSITIONS.getOrDefault(value, new Position(value));
     }
 
     private Position(final int value) {
