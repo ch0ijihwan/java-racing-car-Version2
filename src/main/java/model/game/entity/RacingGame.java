@@ -1,11 +1,12 @@
-package model;
+package model.game.entity;
 
-import model.cars.Cars;
+import model.car.entity.Cars;
+import model.car.vo.Names;
+import model.game.vo.NumberOfAttempt;
 import model.movement.MovementStrategy;
-import model.vo.Names;
-import model.vo.NumberOfAttempt;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class RacingGame {
@@ -54,10 +55,23 @@ public class RacingGame {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public List<String> getWinnerNames() {
+    public List<String> findWinnerNames() {
         return racingCars.getWinners()
                 .stream()
                 .map(car -> car.getName().getValue())
                 .collect(Collectors.toUnmodifiableList());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RacingGame that = (RacingGame) o;
+        return Objects.equals(racingCars, that.racingCars);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(racingCars);
     }
 }
