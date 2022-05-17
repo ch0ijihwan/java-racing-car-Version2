@@ -1,7 +1,8 @@
-package model.cars;
+package model.car;
 
-import model.vo.Name;
-import model.vo.Position;
+import model.car.entity.Car;
+import model.car.vo.Name;
+import model.car.vo.Position;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

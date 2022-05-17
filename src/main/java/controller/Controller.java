@@ -2,11 +2,11 @@ package controller;
 
 import controller.dto.CarsDto;
 import controller.dto.WinnersDto;
-import model.RacingGame;
+import model.car.vo.Names;
+import model.game.entity.RacingGame;
+import model.game.vo.NumberOfAttempt;
 import model.movement.MovementStrategy;
 import model.movement.RandomMovable;
-import model.vo.Names;
-import model.vo.NumberOfAttempt;
 import view.display.Display;
 import view.input.Input;
 
@@ -45,7 +45,7 @@ public class Controller {
     }
 
     private void showRacingResult(final RacingGame racingGame) {
-        WinnersDto winnersDto = new WinnersDto(racingGame.getWinnerNames());
+        WinnersDto winnersDto = new WinnersDto(racingGame.findWinnerNames());
         display.printWinners(winnersDto);
     }
 }

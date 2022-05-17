@@ -1,7 +1,7 @@
-package model.cars;
+package model.car.entity;
 
-import model.vo.Name;
-import model.vo.Position;
+import model.car.vo.Name;
+import model.car.vo.Position;
 
 import java.util.Objects;
 
@@ -17,7 +17,7 @@ public class Car {
         position = Position.valueOfDefaultWithZero();
     }
 
-    Car(final Name name, final Position position) {
+    public Car(final Name name, final Position position) {
         this.name = name;
         this.position = position;
     }

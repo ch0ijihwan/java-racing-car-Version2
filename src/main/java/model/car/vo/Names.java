@@ -1,4 +1,4 @@
-package model.vo;
+package model.car.vo;
 
 import java.util.List;
 import java.util.Objects;

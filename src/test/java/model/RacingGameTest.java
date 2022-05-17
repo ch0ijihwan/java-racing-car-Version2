@@ -1,10 +1,11 @@
 package model;
 
-import model.cars.Car;
-import model.cars.Cars;
+import model.car.entity.Car;
+import model.car.entity.Cars;
+import model.car.vo.Names;
+import model.game.entity.RacingGame;
+import model.game.vo.NumberOfAttempt;
 import model.movement.MovementStrategy;
-import model.vo.Names;
-import model.vo.NumberOfAttempt;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -128,7 +129,7 @@ class RacingGameTest {
         List<String> expect = List.of("hi", "apple");
 
         //when
-        List<String> actual = racingGame.getWinnerNames();
+        List<String> actual = racingGame.findWinnerNames();
 
         //then
         assertThat(actual).isEqualTo(expect);

@@ -1,9 +1,9 @@
-package model.cars;
+package model.car;
 
+import model.car.entity.Car;
+import model.car.entity.Cars;
+import model.car.vo.Names;
 import model.movement.MovementStrategy;
-import model.vo.Name;
-import model.vo.Names;
-import model.vo.Position;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -68,9 +68,8 @@ class CarsTest {
     @DisplayName("자동차들이 중복 될 경우 예외처리 반환")
     void validateDuplication() {
         //given
-        List<Car> input = List.of(new Car(new Name("apple"), Position.valueOfDefaultWithZero()),
-                new Car(new Name("apple"), Position.valueOfDefaultWithZero()));
-
+        List<Car> input = List.of(new Car("apple", 1),
+                new Car("apple", 1));
         //then
         assertThatIllegalArgumentException().isThrownBy(() -> new Cars(input))
                 .withMessage("자동차들 중 중복이 있습니다.");
@@ -117,8 +116,8 @@ class CarsTest {
         );
 
         List<Car> expect = List.of(
-                new Car(new Name("apple"), Position.valueOf(2)),
-                new Car(new Name("hi"), Position.valueOf(2))
+                new Car("apple", 2),
+                new Car("hi", 2)
         );
 
         //when

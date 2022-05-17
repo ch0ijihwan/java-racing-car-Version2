@@ -1,4 +1,4 @@
-package model.vo;
+package model.game.vo;
 
 import java.util.Objects;
 
