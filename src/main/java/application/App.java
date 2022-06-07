@@ -1,19 +1,16 @@
 package application;
 
 import controller.Controller;
-import model.movement.MovementStrategy;
-import model.movement.RandomMovementStrategy;
-import view.displaystrategy.StatusDisplay;
-import view.displaystrategy.StatusDisplayStrategy;
-import view.inputstrategy.ConsoleInputStrategy;
-import view.inputstrategy.InputStrategy;
+import view.display.ConsoleDisplay;
+import view.display.Display;
+import view.input.ConsoleInput;
+import view.input.Input;
 
 public class App {
     public static void main(String[] args) {
-        MovementStrategy movementStrategy = new RandomMovementStrategy();
-        InputStrategy inputStrategy = new ConsoleInputStrategy();
-        StatusDisplayStrategy statusDisplayStrategy = new StatusDisplay();
-        Controller controller = new Controller(movementStrategy, inputStrategy, statusDisplayStrategy);
+        Input input = new ConsoleInput();
+        Display display = new ConsoleDisplay();
+        Controller controller = new Controller(input, display);
         controller.run();
     }
 }

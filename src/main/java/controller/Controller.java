@@ -1,32 +1,51 @@
 package controller;
 
-import model.RacingGame;
+import controller.dto.CarsDto;
+import controller.dto.WinnersDto;
+import model.car.vo.Names;
+import model.game.entity.RacingGame;
+import model.game.vo.NumberOfAttempt;
 import model.movement.MovementStrategy;
-import view.displaystrategy.StatusDisplayStrategy;
-import view.inputstrategy.InputStrategy;
+import model.movement.RandomMovable;
+import view.display.Display;
+import view.input.Input;
+
+import java.util.Arrays;
 
 public class Controller {
-    private final RacingGame racingGame;
-    private final StatusDisplayStrategy statusDisplayStrategy;
+    private final Input input;
+    private final Display display;
+    private final MovementStrategy movementStrategy;
 
-    public Controller(final MovementStrategy movementStrategy, final InputStrategy inputStrategy, final StatusDisplayStrategy statusDisplayStrategy) {
-        this.statusDisplayStrategy = statusDisplayStrategy;
-        statusDisplayStrategy.showInputNames();
-        String[] inputtedNames = inputStrategy.inputRacingCarNames();
-        statusDisplayStrategy.showInputNumberOfAttempts();
-        int numberOfAttempts = inputStrategy.inputNumberAttempts();
-        this.racingGame = new RacingGame(inputtedNames, numberOfAttempts, movementStrategy);
+    public Controller(final Input input, final Display display) {
+        this.input = input;
+        this.display = display;
+        this.movementStrategy = new RandomMovable();
     }
 
     public void run() {
-        statusDisplayStrategy.showStartGame();
-        while (racingGame.isNotOver()) {
-            racingGame.raceOneRound();
-            statusDisplayStrategy.showGameStatus(racingGame.getCars().getRacingCars());
-            racingGame.endOneRound();
+        RacingGame racingGame = setRacingGame();
+        RacingGame endRacingGame = playRacingGame(racingGame, movementStrategy);
+        showRacingResult(endRacingGame);
+    }
+
+    private RacingGame setRacingGame() {
+        Names names = new Names(Arrays.asList(input.inputCarNames()));
+        NumberOfAttempt numberOfAttempt = new NumberOfAttempt(input.inputNumberOfAttempt());
+        return new RacingGame(names, numberOfAttempt);
+    }
+
+    private RacingGame playRacingGame(final RacingGame racingGame, final MovementStrategy movementStrategy) {
+        while (!racingGame.isGameEnd()) {
+            racingGame.playOneRound(movementStrategy);
+            CarsDto carsDto = new CarsDto(racingGame.getCarNamesDuringRacing(), racingGame.getCarPositionsDuringRacing());
+            display.printCarsStatus(carsDto);
         }
-        statusDisplayStrategy.showBar();
-        statusDisplayStrategy.showGameStatus(racingGame.getCars().getRacingCars());
-        statusDisplayStrategy.showEndGame(racingGame.getWinners());
+        return racingGame;
+    }
+
+    private void showRacingResult(final RacingGame racingGame) {
+        WinnersDto winnersDto = new WinnersDto(racingGame.findWinnerNames());
+        display.printWinners(winnersDto);
     }
 }

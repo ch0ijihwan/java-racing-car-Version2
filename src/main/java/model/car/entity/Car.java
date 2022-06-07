@@ -1,20 +1,30 @@
-package model.vo;
+package model.car.entity;
+
+import model.car.vo.Name;
+import model.car.vo.Position;
 
 import java.util.Objects;
 
 public class Car {
-    private static final int ONE_STEP = 1;
-    private static final int START_POSITION = 0;
-    private Position position;
-    private final Name name;
 
-    public Car(final String name) {
-        this(name, START_POSITION);
+    private static final int ONE_STEP = 1;
+
+    private final Name name;
+    private final Position position;
+
+    public Car(final Name name) {
+        this.name = name;
+        position = Position.valueOfDefaultWithZero();
+    }
+
+    public Car(final Name name, final Position position) {
+        this.name = name;
+        this.position = position;
     }
 
     public Car(final String name, final int position) {
         this.name = new Name(name);
-        this.position = new Position(position);
+        this.position = Position.valueOf(position);
     }
 
     public Name getName() {
@@ -25,18 +35,11 @@ public class Car {
         return position;
     }
 
-    public void move(final boolean movable) {
+    public Car move(final boolean movable) {
         if (movable) {
-            this.position = this.position.move(ONE_STEP);
+            return new Car(this.name, position.increasePosition(ONE_STEP));
         }
-    }
-
-    public int getPositionValue(){
-        return this.position.getValue();
-    }
-
-    public String getNameValue(){
-        return this.name.getValue();
+        return this;
     }
 
     @Override
@@ -44,19 +47,19 @@ public class Car {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return Objects.equals(position, car.position) && Objects.equals(name, car.name);
+        return Objects.equals(name, car.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(position, name);
+        return Objects.hash(name);
     }
 
     @Override
     public String toString() {
         return "Car{" +
-                "position=" + position +
-                ", name=" + name +
+                "name=" + name +
+                ", position=" + position +
                 '}';
     }
 }
